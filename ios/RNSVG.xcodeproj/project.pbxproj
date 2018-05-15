@@ -49,6 +49,8 @@
 		10ED4A9E1CF0656A0078BC02 /* RNSVGClipPathManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 10ED4A9D1CF0656A0078BC02 /* RNSVGClipPathManager.m */; };
 		10ED4AA21CF078830078BC02 /* RNSVGNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 10ED4AA11CF078830078BC02 /* RNSVGNode.m */; };
 		10FDEEB21D3FB60500A5C46C /* RNSVGBaseBrush.m in Sources */ = {isa = PBXBuildFile; fileRef = 10FDEEB11D3FB60500A5C46C /* RNSVGBaseBrush.m */; };
+		68678C5E1D75A60A00050246 /* RNSVGBase64Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 68678C5D1D75A60A00050246 /* RNSVGBase64Image.m */; };
+		68678C611D75A62200050246 /* RNSVGBase64ImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 68678C601D75A62200050246 /* RNSVGBase64ImageManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -155,6 +157,10 @@
 		10FDEEB01D3FB60500A5C46C /* RNSVGBaseBrush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNSVGBaseBrush.h; sourceTree = "<group>"; };
 		10FDEEB11D3FB60500A5C46C /* RNSVGBaseBrush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNSVGBaseBrush.m; sourceTree = "<group>"; };
 		10FDEEB31D3FBED400A5C46C /* RNSVGBrushType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNSVGBrushType.h; sourceTree = "<group>"; };
+		68678C5C1D75A60A00050246 /* RNSVGBase64Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNSVGBase64Image.h; path = Elements/RNSVGBase64Image.h; sourceTree = "<group>"; };
+		68678C5D1D75A60A00050246 /* RNSVGBase64Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNSVGBase64Image.m; path = Elements/RNSVGBase64Image.m; sourceTree = "<group>"; };
+		68678C5F1D75A62200050246 /* RNSVGBase64ImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNSVGBase64ImageManager.h; sourceTree = "<group>"; };
+		68678C601D75A62200050246 /* RNSVGBase64ImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNSVGBase64ImageManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +223,8 @@
 		0CF68AF81AF0549300FF9E5C /* ViewManagers */ = {
 			isa = PBXGroup;
 			children = (
+				68678C5F1D75A62200050246 /* RNSVGBase64ImageManager.h */,
+				68678C601D75A62200050246 /* RNSVGBase64ImageManager.m */,
 				10ABC7311D435915006CCF6E /* RNSVGViewBoxManager.h */,
 				10ABC7321D435915006CCF6E /* RNSVGViewBoxManager.m */,
 				10BEC1BE1D3F680F00FDCB19 /* RNSVGLinearGradientManager.h */,
@@ -285,6 +293,8 @@
 		1039D2801CE71DCF001E90A8 /* Elements */ = {
 			isa = PBXGroup;
 			children = (
+				68678C5C1D75A60A00050246 /* RNSVGBase64Image.h */,
+				68678C5D1D75A60A00050246 /* RNSVGBase64Image.m */,
 				10BEC1B81D3F66F500FDCB19 /* RNSVGLinearGradient.h */,
 				10BEC1B91D3F66F500FDCB19 /* RNSVGLinearGradient.m */,
 				10BEC1BA1D3F66F500FDCB19 /* RNSVGRadialGradient.h */,
@@ -385,6 +395,7 @@
 				1039D2B01CE72F27001E90A8 /* RNSVGPercentageConverter.m in Sources */,
 				10BA0D491CE74E3D00887C2B /* RNSVGEllipse.m in Sources */,
 				10ABC7331D435915006CCF6E /* RNSVGViewBoxManager.m in Sources */,
+				68678C5E1D75A60A00050246 /* RNSVGBase64Image.m in Sources */,
 				1039D28B1CE71EB7001E90A8 /* RNSVGPath.m in Sources */,
 				0CF68B0D1AF0549300FF9E5C /* RNSVGPattern.m in Sources */,
 				1023B4931D3DF5060051496D /* RNSVGUse.m in Sources */,
@@ -414,6 +425,7 @@
 				0CF68B0B1AF0549300FF9E5C /* RNSVGBrush.m in Sources */,
 				10BA0D361CE74E3100887C2B /* RNSVGGroupManager.m in Sources */,
 				10BA0D4A1CE74E3D00887C2B /* RNSVGLine.m in Sources */,
+				68678C611D75A62200050246 /* RNSVGBase64ImageManager.m in Sources */,
 				10FDEEB21D3FB60500A5C46C /* RNSVGBaseBrush.m in Sources */,
 				1039D28C1CE71EB7001E90A8 /* RNSVGSvgView.m in Sources */,
 				1023B4961D3DF57D0051496D /* RNSVGUseManager.m in Sources */,

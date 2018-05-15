@@ -25,6 +25,7 @@ public class RNSvgPackage implements ReactPackage {
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         return Arrays.<ViewManager>asList(
+            RNSVGRenderableViewManager.createRNSVGBase64ImageViewManager(),
             RNSVGRenderableViewManager.createRNSVGGroupViewManager(),
             RNSVGRenderableViewManager.createRNSVGPathViewManager(),
             RNSVGRenderableViewManager.createRNSVGCircleViewManager(),

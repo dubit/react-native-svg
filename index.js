@@ -9,6 +9,7 @@ import Path from './elements/Path';
 import G from './elements/G';
 import Text from './elements/Text';
 import Use from './elements/Use';
+import Base64Image from './elements/Base64Image';
 import Image from './elements/Image';
 import Symbol  from './elements/Symbol';
 import Defs from './elements/Defs';
@@ -29,6 +30,7 @@ export {
     Line,
     Rect,
     Use,
+    Base64Image,
     Image,
     Symbol,
     Defs,

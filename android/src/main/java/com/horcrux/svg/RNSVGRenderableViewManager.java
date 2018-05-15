@@ -21,6 +21,7 @@ import com.facebook.react.uimanager.ViewGroupManager;
  */
 public class RNSVGRenderableViewManager extends ViewGroupManager<ViewGroup> {
 
+    /* package */ static final String CLASS_BASE64_IMAGE = "RNSVGBase64Image";
     /* package */ static final String CLASS_GROUP = "RNSVGGroup";
     /* package */ static final String CLASS_PATH = "RNSVGPath";
     /* package */ static final String CLASS_TEXT = "RNSVGText";
@@ -39,6 +40,10 @@ public class RNSVGRenderableViewManager extends ViewGroupManager<ViewGroup> {
     private final String mClassName;
 
     protected RNSVGVirtualNode mVirtualNode;
+
+    public static RNSVGRenderableViewManager createRNSVGBase64ImageViewManager() {
+        return new RNSVGRenderableViewManager(CLASS_BASE64_IMAGE);
+    }
 
     public static RNSVGRenderableViewManager createRNSVGGroupViewManager() {
         return new RNSVGRenderableViewManager(CLASS_GROUP);
@@ -108,6 +113,9 @@ public class RNSVGRenderableViewManager extends ViewGroupManager<ViewGroup> {
     @Override
     public RNSVGVirtualNode createShadowNodeInstance() {
         switch (mClassName) {
+            case CLASS_BASE64_IMAGE:
+                mVirtualNode = new RNSVGBase64ImageShadowNode();
+                break;
             case CLASS_GROUP:
                 mVirtualNode = new RNSVGGroupShadowNode();
                 break;
@@ -161,6 +169,8 @@ public class RNSVGRenderableViewManager extends ViewGroupManager<ViewGroup> {
     @Override
     public Class<? extends RNSVGVirtualNode> getShadowNodeClass() {
         switch (mClassName) {
+            case CLASS_BASE64_IMAGE:
+                return RNSVGBase64ImageShadowNode.class;
             case CLASS_GROUP:
                 return RNSVGGroupShadowNode.class;
             case CLASS_PATH:
