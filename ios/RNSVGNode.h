@@ -6,9 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-#import "UIView+React.h"
+#import <React/UIView+React.h>
 #import "RNSVGCGFCRule.h"
 #import "RNSVGSvgView.h"
+@class RNSVGGroup;
 
 /**
  * RNSVG nodes are implemented as base UIViews. They should be implementation for all basic
@@ -17,30 +18,58 @@
 
 @interface RNSVGNode : UIView
 
+/*
+ N[1/Sqrt[2], 36]
+ The inverse of the square root of 2.
+ Provide enough digits for the 128-bit IEEE quad (36 significant digits).
+ */
+extern CGFloat const RNSVG_M_SQRT1_2l;
+extern CGFloat const RNSVG_DEFAULT_FONT_SIZE;
+
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, assign) CGFloat opacity;
 @property (nonatomic, assign) RNSVGCGFCRule clipRule;
-@property (nonatomic, assign) CGPathRef clipPath; // convert clipPath="M0,0 L0,10 L10,10z" into path
-@property (nonatomic, strong) NSString *clipPathRef; // use clipPath="url(#clip)" as ClipPath
+@property (nonatomic, strong) NSString *clipPath;
 @property (nonatomic, assign) BOOL responsible;
 @property (nonatomic, assign) CGAffineTransform matrix;
+@property (nonatomic, assign) CGAffineTransform invmatrix;
 @property (nonatomic, assign) BOOL active;
+@property (nonatomic, assign) CGPathRef path;
+@property (nonatomic, assign) CGRect clientRect;
+@property (nonatomic, copy) RCTDirectEventBlock onLayout;
+
+
+/**
+ * RNSVGSvgView which ownes current RNSVGNode
+ */
+@property (nonatomic, readonly, weak) RNSVGSvgView *svgView;
+@property (nonatomic, readonly, weak) RNSVGGroup *textRoot;
 
 - (void)invalidate;
 
-- (void)renderTo:(CGContextRef)context;
+- (RNSVGGroup *)getParentTextRoot;
+
+- (void)renderTo:(CGContextRef)context rect:(CGRect)rect;
 
 /**
  * renderTo will take opacity into account and draw renderLayerTo off-screen if there is opacity
  * specified, then composite that onto the context. renderLayerTo always draws at opacity=1.
  * @abstract
  */
-- (void)renderLayerTo:(CGContextRef)context;
-
-- (void)renderClip:(CGContextRef)context;
+- (void)renderLayerTo:(CGContextRef)context rect:(CGRect)rect;
 
 /**
- * clip node by clipPath or clipPathRef.
+ * get clipPath from cache
+ */
+- (CGPathRef)getClipPath;
+
+/**
+ * get clipPath through context
+ */
+- (CGPathRef)getClipPath:(CGContextRef)context;
+
+/**
+ * clip node by clipPath
  */
 - (void)clip:(CGContextRef)context;
 
@@ -49,33 +78,31 @@
  */
 - (CGPathRef)getPath:(CGContextRef) context;
 
+- (CGFloat)relativeOnWidth:(NSString *)length;
+
+- (CGFloat)relativeOnHeight:(NSString *)length;
+
+- (CGFloat)relativeOnOther:(NSString *)length;
+
+- (CGFloat)getFontSizeFromContext;
+
+- (CGFloat)getContextWidth;
+
+- (CGFloat)getContextHeight;
+
+- (CGFloat)getContextLeft;
+
+- (CGFloat)getContextTop;
 
 /**
- * run hitTest
+ * save element`s reference into svg element.
  */
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event withTransform:(CGAffineTransform)transfrom;
-
-- (RNSVGSvgView *)getSvgView;
-
-/**
- * save element`s defination into svg element.
- */
-- (void)saveDefinition;
-
-/**
- * just for template node to merge target node`s properties into owned properties
- */
-- (void)mergeProperties:(__kindof RNSVGNode *)target mergeList:(NSArray<NSString *> *)mergeList;
-
-- (void)mergeProperties:(__kindof RNSVGNode *)target mergeList:(NSArray<NSString *> *)mergeList inherited:(BOOL)inherited;
-
-/**
- * just for template node to reset all owned properties once after rendered.
- */
-- (void)resetProperties;
+- (void)parseReference;
 
 - (void)beginTransparencyLayer:(CGContextRef)context;
 
 - (void)endTransparencyLayer:(CGContextRef)context;
+
+- (void)traverseSubviews:(BOOL (^)(__kindof UIView *node))block;
 
 @end

@@ -1,59 +1,62 @@
-import React, {PropTypes} from 'react';
-import createReactNativeComponentClass from 'react/lib/createReactNativeComponentClass';
-import extractText from '../lib/extract/extractText';
-import {numberProp, pathProps} from '../lib/props';
-import {TextAttributes} from '../lib/attributes';
-import Shape from './Shape';
+import React from "react";
+import PropTypes from "prop-types";
+import { requireNativeComponent } from "react-native";
+import extractText from "../lib/extract/extractText";
+import { textProps } from "../lib/props";
+import { TextAttributes } from "../lib/attributes";
+import extractProps from "../lib/extract/extractProps";
+import Shape from "./Shape";
 
-class Text extends Shape {
-    static displayName = 'Text';
+export default class extends Shape {
+    static displayName = "Text";
 
-    static propTypes = {
-        ...pathProps,
-        dx: numberProp,
-        dy: numberProp,
-        textAnchor: PropTypes.oneOf(['start', 'middle', 'end']),
-        path: PropTypes.string,
-        fontFamily: PropTypes.string,
-        fontSize: numberProp,
-        fontWeight: PropTypes.string,
-        fontStyle: PropTypes.string,
-        font: PropTypes.object,
-        lines: numberProp
+    static propTypes = textProps;
+
+    //noinspection JSUnusedGlobalSymbols
+    static childContextTypes = {
+        isInAParentText: PropTypes.bool
     };
 
-    static defaultProps = {
-        dx: 0,
-        dy: 0
-    };
+    //noinspection JSUnusedGlobalSymbols
+    getChildContext() {
+        return {
+            isInAParentText: true
+        };
+    }
+
+    //noinspection JSUnusedGlobalSymbols
+    getContextTypes() {
+        return {
+            isInAParentText: PropTypes.bool
+        };
+    }
 
     setNativeProps = (...args) => {
         this.root.setNativeProps(...args);
     };
 
     render() {
-        let props = this.props;
+        const props = this.props;
 
-        let x = 0;
-        if (props.x) {
-            x = props.dx ? +props.x + (+props.dx) : +props.x;
-        }
-        let y = 0;
-        if (props.y) {
-            y = props.dy ? +props.y + (+props.dy) : +props.y;
-        }
-
-        return <RNSVGText
-            ref={ele => {this.root = ele;}}
-            {...this.extractProps({...props, x, y})}
-            {...extractText(props)}
-        />;
+        return (
+            <RNSVGText
+                ref={ele => {
+                    this.root = ele;
+                }}
+                {...extractProps(
+                    {
+                        ...props,
+                        x: null,
+                        y: null
+                    },
+                    this
+                )}
+                {...extractText(props, true)}
+            />
+        );
     }
 }
 
-const RNSVGText = createReactNativeComponentClass({
-    validAttributes: TextAttributes,
-    uiViewClassName: 'RNSVGText'
+const RNSVGText = requireNativeComponent("RNSVGText", null, {
+    nativeOnly: TextAttributes
 });
-
-export default Text;

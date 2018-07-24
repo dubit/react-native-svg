@@ -1,110 +1,40 @@
 {
-  "_args": [
-    [
-      {
-        "raw": "react-native-svg@git+https://github.com/zaynyatyi/react-native-svg.git#60a43a5f434e7a777a63bcaceb41648e5d2d71fb",
-        "scope": null,
-        "escapedName": "react-native-svg",
-        "name": "react-native-svg",
-        "rawSpec": "git+https://github.com/zaynyatyi/react-native-svg.git#60a43a5f434e7a777a63bcaceb41648e5d2d71fb",
-        "spec": "git+https://github.com/zaynyatyi/react-native-svg.git#60a43a5f434e7a777a63bcaceb41648e5d2d71fb",
-        "type": "hosted",
-        "hosted": {
-          "type": "github",
-          "ssh": "git@github.com:zaynyatyi/react-native-svg.git#60a43a5f434e7a777a63bcaceb41648e5d2d71fb",
-          "sshUrl": "git+ssh://git@github.com/zaynyatyi/react-native-svg.git#60a43a5f434e7a777a63bcaceb41648e5d2d71fb",
-          "httpsUrl": "git+https://github.com/zaynyatyi/react-native-svg.git#60a43a5f434e7a777a63bcaceb41648e5d2d71fb",
-          "gitUrl": "git://github.com/zaynyatyi/react-native-svg.git#60a43a5f434e7a777a63bcaceb41648e5d2d71fb",
-          "shortcut": "github:zaynyatyi/react-native-svg#60a43a5f434e7a777a63bcaceb41648e5d2d71fb",
-          "directUrl": "https://raw.githubusercontent.com/zaynyatyi/react-native-svg/60a43a5f434e7a777a63bcaceb41648e5d2d71fb/package.json"
-        }
-      },
-      "C:\\Projects\\kingdomscene_app_client"
-    ]
-  ],
-  "_from": "git+https://github.com/zaynyatyi/react-native-svg.git#60a43a5f434e7a777a63bcaceb41648e5d2d71fb",
-  "_id": "react-native-svg@4.1.5",
-  "_inCache": true,
-  "_installable": true,
-  "_location": "/react-native-svg",
-  "_npmOperationalInternal": {
-    "host": "packages-16-east.internal.npmjs.com",
-    "tmp": "tmp/react-native-svg-2.2.0.tgz_1465699254997_0.9396662004292011"
-  },
-  "_phantomChildren": {},
-  "_requested": {
-    "raw": "react-native-svg@git+https://github.com/zaynyatyi/react-native-svg.git#60a43a5f434e7a777a63bcaceb41648e5d2d71fb",
-    "scope": null,
-    "escapedName": "react-native-svg",
+    "version": "6.4.1",
     "name": "react-native-svg",
-    "rawSpec": "git+https://github.com/zaynyatyi/react-native-svg.git#60a43a5f434e7a777a63bcaceb41648e5d2d71fb",
-    "spec": "git+https://github.com/zaynyatyi/react-native-svg.git#60a43a5f434e7a777a63bcaceb41648e5d2d71fb",
-    "type": "hosted",
-    "hosted": {
-      "type": "github",
-      "ssh": "git@github.com:zaynyatyi/react-native-svg.git#60a43a5f434e7a777a63bcaceb41648e5d2d71fb",
-      "sshUrl": "git+ssh://git@github.com/zaynyatyi/react-native-svg.git#60a43a5f434e7a777a63bcaceb41648e5d2d71fb",
-      "httpsUrl": "git+https://github.com/zaynyatyi/react-native-svg.git#60a43a5f434e7a777a63bcaceb41648e5d2d71fb",
-      "gitUrl": "git://github.com/zaynyatyi/react-native-svg.git#60a43a5f434e7a777a63bcaceb41648e5d2d71fb",
-      "shortcut": "github:zaynyatyi/react-native-svg#60a43a5f434e7a777a63bcaceb41648e5d2d71fb",
-      "directUrl": "https://raw.githubusercontent.com/zaynyatyi/react-native-svg/60a43a5f434e7a777a63bcaceb41648e5d2d71fb/package.json"
-    }
-  },
-  "_requiredBy": [
-    "/"
-  ],
-  "_resolved": "git+https://github.com/zaynyatyi/react-native-svg.git#60a43a5f434e7a777a63bcaceb41648e5d2d71fb",
-  "_shasum": "854fab6896d81a90bb0c88a0006918a037596827",
-  "_shrinkwrap": null,
-  "_spec": "react-native-svg@git+https://github.com/zaynyatyi/react-native-svg.git#60a43a5f434e7a777a63bcaceb41648e5d2d71fb",
-  "_where": "C:\\Projects\\kingdomscene_app_client",
-  "bugs": {
-    "url": "https://github.com/magicismight/react-native-svg/issues"
-  },
-  "dependencies": {
-    "color": "^0.11.1",
-    "lodash": "^4.0.0"
-  },
-  "description": "SVG library for react-native",
-  "devDependencies": {
-    "babel-eslint": "^6.0.0",
-    "eslint": "^2.5.3",
-    "eslint-plugin-react": "^4.2.1"
-  },
-  "directories": {},
-  "gitHead": "60a43a5f434e7a777a63bcaceb41648e5d2d71fb",
-  "homepage": "https://github.com/magicismight/react-native-svg#readme",
-  "keywords": [
-    "react-component",
-    "react-native",
-    "ios",
-    "android",
-    "SVG",
-    "ART",
-    "VML",
-    "gradient"
-  ],
-  "license": "MIT",
-  "main": "./index.js",
-  "name": "react-native-svg",
-  "nativePackage": true,
-  "optionalDependencies": {},
-  "peerDependencies": {
-    "react-native": ">=0.29.0"
-  },
-  "readme": "## react-native-svg\r\n\r\n[![Version](https://img.shields.io/npm/v/react-native-svg.svg)](https://www.npmjs.com/package/react-native-svg)\r\n[![Build Status](https://travis-ci.org/magicismight/react-native-svg.svg?branch=master)](https://travis-ci.org/magicismight/react-native-svg)\r\n[![Known Vulnerabilities](https://snyk.io/test/npm/react-native-svg/badge.svg)](https://snyk.io/test/npm/react-native-svg)\r\n\r\n`react-native-svg` is built to provide a SVG interface to react native on both iOS and Android\r\n\r\n# IMPORTANT：\r\n\r\n`react-native-art-svg` has changed name to **`react-native-svg`**(*thanks for [@Brent Vatne](https://github.com/brentvatne) handing over me this npm package.*).\r\n\r\nAnd furthermore:\r\n`react-native-svg` **NO LONGER rely on ReactNativeART**, it has its own native code dependency now (which is based on ReactNativeART code but support more SVG features)\r\n\r\n\r\n### Features\r\n\r\n1. Supports most of SVG elements and properties(Rect, Circle, Line, Polyline, Polygon, G ...).\r\n2. Easy to convert SVG code into ReactNative code.\r\n\r\n\r\n#### Install\r\n\r\n### note: react-native-svg >= 3.0 only support react-native >= 0.29.0\r\n\r\n1. Install library from npm.\r\n\r\n```bash\r\nnpm install react-native-svg --save\r\n```\r\n\r\n2 . Link native code\r\n\r\n```bash\r\nreact-native link react-native-svg\r\n```\r\nreact-native@0.29.0 and 0.29.1 cannot work with Android link properly:[here](https://github.com/facebook/react-native/pull/8612)\r\n\r\n\r\nOr use rnpm instead\r\n\r\n```bash\r\nrnpm link react-native-svg\r\n```\r\n\r\n\r\n#### Usage\r\n\r\nThere is an easy example\r\n\r\n```javascript\r\nimport Svg,{\r\n    Circle,\r\n    Ellipse,\r\n    G,\r\n    LinearGradient,\r\n    RadialGradient,\r\n    Line,\r\n    Path,\r\n    Polygon,\r\n    Polyline,\r\n    Rect,\r\n    Symbol,\r\n    Text,\r\n    Use,\r\n    Defs,\r\n    Stop\r\n} from 'react-native-svg';\r\n\r\nclass SvgExample extends Component {\r\n    render() {\r\n        return (\r\n            <Svg\r\n                height=\"100\"\r\n                width=\"100\"\r\n            >\r\n                <Circle\r\n                    cx=\"50\"\r\n                    cy=\"50\"\r\n                    r=\"45\"\r\n                    stroke=\"blue\"\r\n                    strokeWidth=\"2.5\"\r\n                    fill=\"green\"\r\n                />\r\n                <Rect\r\n                    x=\"15\"\r\n                    y=\"15\"\r\n                    width=\"70\"\r\n                    height=\"70\"\r\n                    stroke=\"red\"\r\n                    strokeWidth=\"2\"\r\n                    fill=\"yellow\"\r\n                />\r\n            </Svg>\r\n        );\r\n    }\r\n}\r\n\r\n```\r\n\r\nThis will draw a graphics like this\r\n![SVG example](./screenShoots/svg.png)\r\n\r\n#### Common props:\r\n\r\nName            | Default    | Description\r\n----------------|------------|--------------\r\nfill            | '#000'     | The fill prop refers to the color inside the shape.\r\nfillOpacity     | 1          | This prop specifies the opacity of the color or the content the current object is filled with.\r\nstroke          | 'none'     | The stroke prop controls how the outline of a shape appears.\r\nstrokeWidth     | 1          | The strokeWidth prop specifies the width of the outline on the current object.\r\nstrokeOpacity   | 1          | The strokeOpacity prop specifies the opacity of the outline on the current object.\r\nstrokeLinecap   | 'square'   | The strokeLinecap prop specifies the shape to be used at the end of open subpaths when they are stroked.\r\nstrokeLinejoin  | 'miter'    | The strokeLinejoin prop specifies the shape to be used at the corners of paths or basic shapes when they are stroked.\r\nstrokeDasharray | []         | The strokeDasharray prop controls the pattern of dashes and gaps used to stroke paths.\r\nstrokeDashoffset| null       | The strokeDashoffset prop specifies the distance into the dash pattern to start the dash.\r\nx               | 0          | Translate distance on x-axis.\r\ny               | 0          | Translate distance on y-axis.\r\nrotate          | 0          | Rotation degree value on the current object.\r\nscale           | 1          | Scale value on the current object.\r\norigin          | 0, 0       | Transform origin coordinates for the current object.\r\noriginX         | 0          | Transform originX coordinates for the current object.\r\noriginY         | 0          | Transform originY coordinates for the current object.\r\n\r\n\r\n#### Supported elements:\r\n\r\n##### Svg\r\n\r\n```html\r\n<Svg\r\n    height=\"100\"\r\n    width=\"100\"\r\n>\r\n    <Rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"black\" />\r\n    <Circle cx=\"50\" cy=\"50\" r=\"30\" fill=\"yellow\" />\r\n    <Circle cx=\"40\" cy=\"40\" r=\"4\" fill=\"black\" />\r\n    <Circle cx=\"60\" cy=\"40\" r=\"4\" fill=\"black\" />\r\n    <Path d=\"M 40 60 A 10 10 0 0 0 60 60\" stroke=\"black\" />\r\n</Svg>\r\n```\r\n\r\n##### Rect\r\n\r\nThe <Rect> element is used to create a rectangle and variations of a rectangle shape:\r\n\r\n```html\r\n<Svg\r\n    width=\"200\"\r\n    height=\"60\"\r\n>\r\n    <Rect\r\n        x=\"25\"\r\n        y=\"5\"\r\n        width=\"150\"\r\n        height=\"50\"\r\n        fill=\"rgb(0,0,255)\"\r\n        strokeWidth=\"3\"\r\n        stroke=\"rgb(0,0,0)\"\r\n    />\r\n</Svg>\r\n```\r\n\r\n![Rect](./screenShoots/rect.png)\r\n\r\n  Code explanation:\r\n\r\n  * The width and height props of the <Rect> element define the height and the width of the rectangle\r\n  * The x prop defines the left position of the rectangle (e.g. x=\"25\" places the rectangle 25 px from the left margin)\r\n  * The y prop defines the top position of the rectangle (e.g. y=\"5\" places the rectangle 5 px from the top margin)\r\n\r\n##### Circle\r\n\r\nThe <Circle> element is used to create a circle:\r\n\r\n```html\r\n<Svg\r\n    height=\"100\"\r\n    width=\"100\"\r\n>\r\n    <Circle\r\n        cx=\"50\"\r\n        cy=\"50\"\r\n        r=\"50\"\r\n        fill=\"pink\"\r\n    />\r\n</Svg>\r\n```\r\n\r\n![Rect](./screenShoots/circle.png)\r\n\r\n  Code explanation:\r\n\r\n  * The cx and cy props define the x and y coordinates of the center of the circle. If cx and cy are omitted, the circle's center is set to (0,0)\r\n  * The r prop defines the radius of the circle\r\n\r\n##### Ellipse\r\n\r\nThe <Ellipse> element is used to create an ellipse.\r\n\r\nAn ellipse is closely related to a circle. The difference is that an ellipse has an x and a y radius that differs from each other, while a circle has equal x and y radius\r\n\r\n```html\r\n<Svg\r\n    height=\"100\"\r\n    width=\"110\"\r\n>\r\n    <Ellipse\r\n        cx=\"55\"\r\n        cy=\"55\"\r\n        rx=\"50\"\r\n        ry=\"30\"\r\n        stroke=\"purple\"\r\n        strokeWidth=\"2\"\r\n        fill=\"yellow\"\r\n    />\r\n</Svg>\r\n```\r\n![Rect](./screenShoots/ellipse.png)\r\n\r\n  Code explanation:\r\n\r\n  * The cx prop defines the x coordinate of the center of the ellipse\r\n  * The cy prop defines the y coordinate of the center of the ellipse\r\n  * The rx prop defines the horizontal radius\r\n  * The ry prop defines the vertical radius\r\n\r\n##### Line\r\n\r\nThe <Line> element is an SVG basic shape, used to create a line connecting two points.\r\n\r\n```html\r\n<Svg\r\n    height=\"100\"\r\n    width=\"100\"\r\n>\r\n    <Line\r\n        x1=\"0\"\r\n        y1=\"0\"\r\n        x2=\"100\"\r\n        y2=\"100\"\r\n        stroke=\"red\"\r\n        strokeWidth=\"2\"\r\n    />\r\n</Svg>\r\n```\r\n\r\n![Rect](./screenShoots/line.png)\r\n\r\n  Code explanation:\r\n\r\n  * The x1 prop defines the start of the line on the x-axis\r\n  * The y1 prop defines the start of the line on the y-axis\r\n  * The x2 prop defines the end of the line on the x-axis\r\n  * The y2 prop defines the end of the line on the y-axis\r\n\r\n##### Polygon\r\n\r\nThe <Polygon> element is used to create a graphic that contains at least three sides.\r\n\r\nPolygons are made of straight lines, and the shape is \"closed\" (all the lines connect up).\r\n\r\n```html\r\n<Svg\r\n    height=\"100\"\r\n    width=\"100\"\r\n>\r\n    <Polygon\r\n        points=\"40,5 70,80 25,95\"\r\n        fill=\"lime\"\r\n        stroke=\"purple\"\r\n        strokeWidth=\"1\"\r\n    />\r\n</Svg>\r\n```\r\n\r\n![Rect](./screenShoots/polygon.png)\r\n\r\n  Code explanation:\r\n\r\n  * The points prop defines the x and y coordinates for each corner of the polygon\r\n\r\n##### Polyline\r\n\r\nThe <Polyline> element is used to create any shape that consists of only straight lines:\r\n\r\n```html\r\n<Svg\r\n    height=\"100\"\r\n    width=\"100\"\r\n>\r\n    <Polyline\r\n        points=\"10,10 20,12 30,20 40,60 60,70 95,90\"\r\n        fill=\"none\"\r\n        stroke=\"black\"\r\n        strokeWidth=\"3\"\r\n    />\r\n</Svg>\r\n```\r\n\r\n![Rect](./screenShoots/polyline.png)\r\n\r\n  Code explanation:\r\n\r\n  * The points prop defines the x and y coordinates for each point of the polyline\r\n\r\n##### Path\r\n\r\nThe <Path> element is used to define a path.\r\n\r\nThe following commands are available for path data:\r\n\r\n  * M = moveto\r\n  * L = lineto\r\n  * H = horizontal lineto\r\n  * V = vertical lineto\r\n  * C = curveto\r\n  * S = smooth curveto\r\n  * Q = quadratic Bézier curve\r\n  * T = smooth quadratic Bézier curveto\r\n  * A = elliptical Arc\r\n  * Z = closepath\r\n`Note:` All of the commands above can also be expressed with lower letters. Capital letters means absolutely positioned, lower cases means relatively positioned.\r\n\r\n```html\r\n<Svg\r\n    height=\"100\"\r\n    width=\"100\"\r\n>\r\n    <Path\r\n        d=\"M25 10 L98 65 L70 25 L16 77 L11 30 L0 4 L90 50 L50 10 L11 22 L77 95 L20 25\"\r\n        fill=\"none\"\r\n        stroke=\"red\"\r\n    />\r\n</Svg>\r\n```\r\n\r\n![Rect](./screenShoots/path.png)\r\n\r\n\r\n##### Text\r\n\r\nThe <Text> element is used to define a text.\r\n\r\n```html\r\n<Svg\r\n    height=\"60\"\r\n    width=\"200\"\r\n>\r\n    <Text\r\n        fill=\"none\"\r\n        stroke=\"purple\"\r\n        fontSize=\"20\"\r\n        fontWeight=\"bold\"\r\n        x=\"100\"\r\n        y=\"20\"\r\n        textAnchor=\"middle\"\r\n    >STROKED TEXT</Text>\r\n</Svg>\r\n```\r\n\r\n![Rect](./screenShoots/text.png)\r\n\r\n##### G\r\n\r\nThe <G> element is a container used to group other SVG elements. Transformations applied to the g element are performed on all of its child elements, and any of its props are inherited by its child elements. It can also group multiple elements to be referenced later with the [&lt;Use /&gt;](#use) element.\r\n\r\n```html\r\n<Svg\r\n    height=\"100\"\r\n    width=\"200\"\r\n>\r\n    <G\r\n        rotate=\"50\"\r\n        origin=\"100, 50\"\r\n    >\r\n        <Line\r\n            x1=\"60\"\r\n            y1=\"10\"\r\n            x2=\"140\"\r\n            y2=\"10\"\r\n            stroke=\"#060\"\r\n        />\r\n\r\n        <Rect\r\n            x=\"60\"\r\n            y=\"20\"\r\n            height=\"50\"\r\n            width=\"80\"\r\n            stroke=\"#060\"\r\n            fill=\"#060\"\r\n        />\r\n\r\n        <Text\r\n            x=\"100\"\r\n            y=\"75\"\r\n            stroke=\"#600\"\r\n            fill=\"#600\"\r\n            textAnchor=\"middle\"\r\n        >\r\n            Text grouped with shapes</Text>\r\n    </G>\r\n</Svg>\r\n```\r\n![G](./screenShoots/g.png)\r\n\r\n<h5 id=\"use\">Use</h5>\r\n\r\nThe <Use> element can reuse an SVG shape from elsewhere in the SVG document, including <G> elements and <Symbol> elements.\r\n\r\nThe reused shape can be defined inside the [&lt;Defs&gt;](#defs) element (which makes the shape invisible until used) or outside.\r\n\r\n```html\r\n<Svg\r\n    height=\"100\"\r\n    width=\"300\"\r\n>\r\n    <Defs>\r\n        <G id=\"shape\">\r\n            <G>\r\n                <Circle cx=\"50\" cy=\"50\" r=\"50\" />\r\n                <Rect x=\"50\" y=\"50\" width=\"50\" height=\"50\" />\r\n                <Circle cx=\"50\" cy=\"50\" r=\"5\" fill=\"blue\" />\r\n            </G>\r\n        </G>\r\n    </Defs>\r\n    <Use href=\"#shape\" x=\"20\" y=\"0\"/>\r\n    <Use href=\"#shape\" x=\"170\"y=\"0\" />\r\n</Svg>\r\n```\r\n\r\nThis example shows a <G> element defined inside a [&lt;Defs&gt;](#defs) element. This makes the <G> invisible unless referenced by a <Use> element.\r\n\r\nBefore the <G> element can be referenced, it must have an ID set on it via its id prop. The <Use> element references the <G> element via its `href` prop. Notice the # in front of the ID in the prop value.\r\n\r\nThe <Use> element specifies where to show the reused shapes via its x and y props. Notice that the shapes inside the <G> element are located at 0,0. That is done because their position is added to the position specified in the <Use> element.\r\n\r\n![use](./screenShoots/use.png)\r\n\r\n\r\n##### Symbol\r\n\r\nThe SVG <Symbol> element is used to define reusable symbols. The shapes nested inside a <Symbol> are not displayed unless referenced by a <Use> element.\r\n\r\n```html\r\n<Svg\r\n    height=\"150\"\r\n    width=\"110\"\r\n>\r\n    <Symbol id=\"symbol\" viewbox=\"0 0 150 110\" width=\"100\" height=\"50\">\r\n        <Circle cx=\"50\" cy=\"50\" r=\"40\" strokeWidth=\"8\" stroke=\"red\" fill=\"red\"/>\r\n        <Circle cx=\"90\" cy=\"60\" r=\"40\" strokeWidth=\"8\" stroke=\"green\" fill=\"white\"/>\r\n    </Symbol>\r\n\r\n    <Use\r\n        href=\"#symbol\"\r\n        x=\"0\"\r\n        y=\"0\"\r\n    />\r\n    <Use\r\n        href=\"#symbol\"\r\n        x=\"0\"\r\n        y=\"50\"\r\n        width=\"75\"\r\n        height=\"38\"\r\n    />\r\n    <Use\r\n        href=\"#symbol\"\r\n        x=\"0\"\r\n        y=\"100\"\r\n        width=\"50\"\r\n        height=\"25\"\r\n    />\r\n</Svg>\r\n```\r\n\r\n![symbol](./screenShoots/symbol.png)\r\n\r\n<h5 id=\"defs\">Defs</h5>\r\n\r\nThe <Defs> element is used to embed definitions that can be reused inside an SVG image. For instance, you can group SVG shapes together and reuse them as a single shape.\r\n\r\n##### LinearGradient\r\n\r\nThe <LinearGradient> element is used to define a linear gradient.\r\nThe <LinearGradient> element must be nested within a [&lt;Defs&gt;](#defs) tag. The [&lt;Defs&gt;](#defs) tag is short for definitions and contains definition of special elements (such as gradients).\r\n\r\nLinear gradients can be defined as horizontal, vertical or angular gradients:\r\n\r\n  * Horizontal gradients are created when y1 and y2 are equal and x1 and x2 differ\r\n  * Vertical gradients are created when x1 and x2 are equal and y1 and y2 differ\r\n  * Angular gradients are created when x1 and x2 differ and y1 and y2 differ\r\n\r\n```html\r\n<Svg\r\n    height=\"150\"\r\n    width=\"300\"\r\n>\r\n    <Defs>\r\n        <LinearGradient id=\"grad\" x1=\"0\" y1=\"0\" x2=\"170\" y2=\"0\">\r\n            <Stop offset=\"0\" stopColor=\"rgb(255,255,0)\" stopOpacity=\"0\" />\r\n            <Stop offset=\"1\" stopColor=\"red\" stopOpacity=\"1\" />\r\n        </LinearGradient>\r\n    </Defs>\r\n    <Ellipse cx=\"150\" cy=\"75\" rx=\"85\" ry=\"55\" fill=\"url(#grad)\" />\r\n</Svg>\r\n```\r\n\r\nCode explanation:\r\n\r\n  * The id prop of the <LinearGradient> tag defines a unique name for the gradient\r\n  * The x1, x2, y1,y2 props of the <LinearGradient> tag define the start and end position of the gradient\r\n  * The color range for a gradient can be composed of two or more colors. Each color is specified with a <Stop> tag. The offset prop is used to define where the gradient color begin and end\r\n  * The fill prop links the ellipse element to the gradient\r\n\r\n![LinearGradient](./screenShoots/lineargradient.png)\r\n\r\n*NOTICE:*\r\nLinearGradient also supports percentage as prop:\r\n```html\r\n<LinearGradient id=\"grad\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"0%\">\r\n    <Stop offset=\"0%\" stopColor=\"rgb(255,255,0)\" stopOpacity=\"0\" />\r\n    <Stop offset=\"100%\" stopColor=\"red\" stopOpacity=\"1\" />\r\n</LinearGradient>\r\n```\r\nThis result is same as the example before.\r\n\r\nBut I recommend you to use exact number instead, it has more performance advantages while using number instead of percentage.\r\n\r\n##### RadialGradient\r\n\r\nThe <RadialGradient> element is used to define a radial gradient.\r\nThe <RadialGradient> element must be nested within a [&lt;Defs&gt;](#defs) tag. The [&lt;Defs&gt;](#defs) tag is short for definitions and contains definition of special elements (such as gradients).\r\n\r\n```html\r\n<Svg\r\n    height=\"150\"\r\n    width=\"300\"\r\n>\r\n    <Defs>\r\n        <RadialGradient id=\"grad\" cx=\"150\" cy=\"75\" rx=\"85\" ry=\"55\" fx=\"150\" fy=\"75\">\r\n            <Stop\r\n                offset=\"0\"\r\n                stopColor=\"#ff0\"\r\n                stopOpacity=\"1\"\r\n            />\r\n            <Stop\r\n                offset=\"1\"\r\n                stopColor=\"#83a\"\r\n                stopOpacity=\"1\"\r\n            />\r\n        </RadialGradient>\r\n    </Defs>\r\n    <Ellipse cx=\"150\" cy=\"75\" rx=\"85\" ry=\"55\" fill=\"url(#grad)\" />\r\n</Svg>\r\n```\r\n\r\nCode explanation:\r\n\r\n  * The id prop of the <radialGradient> tag defines a unique name for the gradient\r\n  * The cx, cy and r props define the outermost circle and the fx and fy define the innermost circle\r\n  * The color range for a gradient can be composed of two or more colors. Each color is specified with a <stop> tag. The offset prop is used to define where the gradient color begin and end\r\n  * The fill prop links the ellipse element to the gradient\r\n\r\n![RadialGradient](./screenShoots/radialgradient.png)\r\n\r\n#### Run example:\r\n\r\n```bash\r\n\r\ncd ./Example\r\nnpm install\r\n\r\n```\r\n\r\n#### TODO:\r\n1. add native method for elements\r\n2. more Text features support (textPath, tref, tspan)\r\n3. Pattern element\r\n4. implement Animated elements\r\n5. load Image from url\r\n6. Mask element\r\n\r\n### Known issues:\r\n1. cannot set alpha channel for Gradient on iOS.\r\n2. cannot apply focus point of RadialGradient on Android.\r\n3. onPanResponderMove on Android returns incorrect gestureState.\r\n\r\n#### Thanks:\r\n\r\n* [w3schools.com SVG Tutorial](http://www.w3schools.com/svg/)\r\n* [SVG Tutorial](http://tutorials.jenkov.com/svg/index.html)\r\n* [MDN](https://developer.mozilla.org/en/docs/Web/SVG)\r\n",
-  "readmeFilename": "README.md",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/magicismight/react-native-svg.git"
-  },
-  "rnpm": {
-    "ios": {
-      "project": "ios/RNSVG.xcodeproj"
-    }
-  },
-  "scripts": {
-    "lint": "eslint ./"
-  },
-  "version": "4.1.5"
+    "description": "SVG library for react-native",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/magicismight/react-native-svg"
+    },
+    "license": "MIT",
+    "main": "./index.js",
+    "keywords": [
+        "react-component",
+        "react-native",
+        "ios",
+        "android",
+        "SVG",
+        "ART",
+        "VML",
+        "gradient"
+    ],
+    "scripts": {
+        "lint": "eslint ./"
+    },
+    "peerDependencies": {
+        "react-native": ">=0.50.0",
+        "react": "*",
+        "prop-types": "^15.5.7"
+    },
+    "dependencies": {
+        "color": "^2.0.1",
+        "lodash": "^4.16.6",
+        "pegjs": "^0.10.0"
+    },
+    "devDependencies": {
+        "babel-eslint": "^6.1.2",
+        "eslint": "^2.13.1",
+        "eslint-plugin-react": "^4.3.0"
+    },
+    "nativePackage": true
 }

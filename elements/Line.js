@@ -1,11 +1,12 @@
-import React from 'react';
-import createReactNativeComponentClass from 'react/lib/createReactNativeComponentClass';
-import {LineAttributes} from '../lib/attributes';
-import Shape from './Shape';
-import {pathProps, numberProp} from '../lib/props';
+import React from "react";
+import { requireNativeComponent } from "react-native";
+import { LineAttributes } from "../lib/attributes";
+import Shape from "./Shape";
+import { pathProps, numberProp } from "../lib/props";
+import extractProps from "../lib/extract/extractProps";
 
-class Line extends Shape {
-    static displayName = 'Line';
+export default class extends Shape {
+    static displayName = "Line";
 
     static propTypes = {
         ...pathProps,
@@ -28,20 +29,21 @@ class Line extends Shape {
 
     render() {
         let props = this.props;
-        return <RNSVGLine
-            ref={ele => {this.root = ele;}}
-            {...this.extractProps(props)}
-            x1={props.x1.toString()}
-            y1={props.y1.toString()}
-            x2={props.x2.toString()}
-            y2={props.y2.toString()}
-        />;
+        return (
+            <RNSVGLine
+                ref={ele => {
+                    this.root = ele;
+                }}
+                {...extractProps(props, this)}
+                x1={props.x1.toString()}
+                y1={props.y1.toString()}
+                x2={props.x2.toString()}
+                y2={props.y2.toString()}
+            />
+        );
     }
 }
 
-const RNSVGLine = createReactNativeComponentClass({
-    validAttributes: LineAttributes,
-    uiViewClassName: 'RNSVGLine'
+const RNSVGLine = requireNativeComponent("RNSVGLine", null, {
+    nativeOnly: LineAttributes
 });
-
-export default Line;

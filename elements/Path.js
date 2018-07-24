@@ -1,12 +1,13 @@
-import React, {PropTypes} from 'react';
-import SerializablePath from '../lib/SerializablePath';
-import createReactNativeComponentClass from 'react/lib/createReactNativeComponentClass';
-import {PathAttributes} from '../lib/attributes';
-import Shape from './Shape';
-import {pathProps} from '../lib/props';
+import React from "react";
+import PropTypes from "prop-types";
+import { requireNativeComponent } from "react-native";
+import { PathAttributes } from "../lib/attributes";
+import Shape from "./Shape";
+import { pathProps } from "../lib/props";
+import extractProps from "../lib/extract/extractProps";
 
-class Path extends Shape {
-    static displayName = 'Path';
+export default class extends Shape {
+    static displayName = "Path";
 
     static propTypes = {
         ...pathProps,
@@ -20,20 +21,18 @@ class Path extends Shape {
     render() {
         let props = this.props;
 
-        let d = new SerializablePath(props.d).toJSON();
         return (
             <RNSVGPath
-                ref={ele => {this.root = ele;}}
-                {...this.extractProps(props)}
-                d={d}
+                ref={ele => {
+                    this.root = ele;
+                }}
+                {...extractProps(props, this)}
+                d={props.d}
             />
         );
     }
 }
 
-const RNSVGPath = createReactNativeComponentClass({
-    validAttributes: PathAttributes,
-    uiViewClassName: 'RNSVGPath'
+const RNSVGPath = requireNativeComponent("RNSVGPath", null, {
+    nativeOnly: PathAttributes
 });
-
-export default Path;

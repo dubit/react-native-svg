@@ -13,11 +13,17 @@
 
 - (void)renderTo:(CGContextRef)context
 {
-    for (RNSVGNode *node in self.subviews) {
+    // Defs do not render
+}
+
+- (void)parseReference
+{
+    [self traverseSubviews:^(RNSVGNode *node) {
         if ([node isKindOfClass:[RNSVGNode class]]) {
-            [node saveDefinition];
+            [node parseReference];
         }
-    }
+        return YES;
+    }];
 }
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event

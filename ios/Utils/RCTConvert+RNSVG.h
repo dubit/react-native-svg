@@ -7,26 +7,27 @@
  */
 
 #import <QuartzCore/QuartzCore.h>
+#import <CoreText/CoreText.h>
 #import "RCTConvert+RNSVG.h"
 #import "RNSVGCGFloatArray.h"
-#import "RNSVGTextFrame.h"
-#import "RCTConvert.h"
+#import <React/RCTConvert.h>
 #import "RNSVGCGFCRule.h"
+#import "RNSVGVBMOS.h"
+#import "RNSVGUnits.h"
+#import "RNSVGPathParser.h"
 
 @class RNSVGBrush;
 
 @interface RCTConvert (RNSVG)
 
-+ (CGPathRef)CGPath:(id)json;
-+ (CTTextAlignment)CTTextAlignment:(id)json;
 + (RNSVGCGFCRule)RNSVGCGFCRule:(id)json;
-+ (RNSVGTextFrame)RNSVGTextFrame:(id)json;
++ (RNSVGVBMOS)RNSVGVBMOS:(id)json;
++ (RNSVGUnits)RNSVGUnits:(id)json;
 + (RNSVGCGFloatArray)RNSVGCGFloatArray:(id)json;
 + (RNSVGBrush *)RNSVGBrush:(id)json;
-
-+ (NSArray *)RNSVGBezier:(id)json;
-+ (CGRect)CGRect:(id)json offset:(NSUInteger)offset;
-+ (CGColorRef)CGColor:(id)json offset:(NSUInteger)offset;
-+ (CGGradientRef)CGGradient:(id)json offset:(NSUInteger)offset;
++ (RNSVGPathParser *)RNSVGCGPath:(NSString *)d;
++ (CGRect)RNSVGCGRect:(id)json offset:(NSUInteger)offset;
++ (CGColorRef)RNSVGCGColor:(id)json offset:(NSUInteger)offset;
++ (CGGradientRef)RNSVGCGGradient:(id)json offset:(NSUInteger)offset;
 
 @end

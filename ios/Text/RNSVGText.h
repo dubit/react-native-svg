@@ -7,13 +7,22 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "RNSVGPath.h"
-#import "RNSVGTextFrame.h"
+#import "RNSVGGroup.h"
 
-@interface RNSVGText : RNSVGPath
+@interface RNSVGText : RNSVGGroup
 
-@property (nonatomic, assign) CTTextAlignment alignment;
-@property (nonatomic, assign) RNSVGTextFrame textFrame;
-@property (nonatomic, copy) NSArray<NSArray *> *path;
+@property (nonatomic, strong) NSString *textLength;
+@property (nonatomic, strong) NSString *baselineShift;
+@property (nonatomic, strong) NSString *lengthAdjust;
+@property (nonatomic, strong) NSString *alignmentBaseline;
+@property (nonatomic, strong) NSArray<NSString *> *deltaX;
+@property (nonatomic, strong) NSArray<NSString *> *deltaY;
+@property (nonatomic, strong) NSArray<NSString *> *positionX;
+@property (nonatomic, strong) NSArray<NSString *> *positionY;
+@property (nonatomic, strong) NSArray<NSString *> *rotate;
+
+- (void)releaseCachedPath;
+- (CGPathRef)getGroupPath:(CGContextRef)context;
+- (CTFontRef)getFontFromContext;
 
 @end

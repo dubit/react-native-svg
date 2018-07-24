@@ -1,11 +1,12 @@
-import React from 'react';
-import createReactNativeComponentClass from 'react/lib/createReactNativeComponentClass';
-import Shape from './Shape';
-import {pathProps, numberProp} from '../lib/props';
-import {EllipseAttributes} from '../lib/attributes';
+import React from "react";
+import { requireNativeComponent } from "react-native";
+import Shape from "./Shape";
+import { pathProps, numberProp } from "../lib/props";
+import { EllipseAttributes } from "../lib/attributes";
+import extractProps from "../lib/extract/extractProps";
 
-class Ellipse extends Shape{
-    static displayName = 'Ellipse';
+export default class extends Shape {
+    static displayName = "Ellipse";
 
     static propTypes = {
         ...pathProps,
@@ -29,20 +30,21 @@ class Ellipse extends Shape{
     render() {
         let props = this.props;
 
-        return <RNSVGEllipse
-            ref={ele => {this.root = ele;}}
-            {...this.extractProps(props)}
-            cx={props.cx.toString()}
-            cy={props.cy.toString()}
-            rx={props.rx.toString()}
-            ry={props.ry.toString()}
-        />;
+        return (
+            <RNSVGEllipse
+                ref={ele => {
+                    this.root = ele;
+                }}
+                {...extractProps(props, this)}
+                cx={props.cx.toString()}
+                cy={props.cy.toString()}
+                rx={props.rx.toString()}
+                ry={props.ry.toString()}
+            />
+        );
     }
 }
 
-const RNSVGEllipse = createReactNativeComponentClass({
-    validAttributes: EllipseAttributes,
-    uiViewClassName: 'RNSVGEllipse'
+const RNSVGEllipse = requireNativeComponent("RNSVGEllipse", null, {
+    nativeOnly: EllipseAttributes
 });
-
-export default Ellipse;

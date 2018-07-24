@@ -1,11 +1,12 @@
-import React, {Component, PropTypes} from 'react';
-import createReactNativeComponentClass from 'react/lib/createReactNativeComponentClass';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { requireNativeComponent } from "react-native";
 import extractProps from '../lib/extract/extractProps';
-import {Base64ImageAttributes} from '../lib/attributes';
+import { Base64ImageAttributes } from '../lib/attributes';
 import Shape from './Shape';
-import {numberProp, touchableProps, responderProps} from '../lib/props';
+import { touchableProps, responderProps } from '../lib/props';
 
-class Base64Image extends Shape{
+class Base64Image extends Shape {
     static displayName = 'Base64Image';
     static propTypes = {
         ...responderProps,
@@ -46,9 +47,8 @@ class Base64Image extends Shape{
     }
 }
 
-const RNSVGBase64Image = createReactNativeComponentClass({
-    validAttributes: Base64ImageAttributes,
-    uiViewClassName: 'RNSVGBase64Image'
+const RNSVGBase64Image = requireNativeComponent("RNSVGBase64Image", null, {
+    nativeOnly: Base64ImageAttributes
 });
 
 export default Base64Image;

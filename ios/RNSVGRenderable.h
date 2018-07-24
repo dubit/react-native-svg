@@ -12,6 +12,7 @@
 #import "RNSVGCGFloatArray.h"
 #import "RNSVGCGFCRule.h"
 #import "RNSVGNode.h"
+#import "RNSVGPercentageConverter.h"
 
 @interface RNSVGRenderable : RNSVGNode
 
@@ -20,23 +21,21 @@
 @property (nonatomic, assign) RNSVGCGFCRule fillRule;
 @property (nonatomic, strong) RNSVGBrush *stroke;
 @property (nonatomic, assign) CGFloat strokeOpacity;
-@property (nonatomic, assign) CGFloat strokeWidth;
+@property (nonatomic, strong) NSString *strokeWidth;
 @property (nonatomic, assign) CGLineCap strokeLinecap;
 @property (nonatomic, assign) CGLineJoin strokeLinejoin;
 @property (nonatomic, assign) CGFloat strokeMiterlimit;
-@property (nonatomic, assign) RNSVGCGFloatArray strokeDasharray;
+@property (nonatomic, assign) RNSVGCGFloatArray strokeDasharrayData;
+@property (nonatomic, strong) NSArray<NSString *> *strokeDasharray;
 @property (nonatomic, assign) CGFloat strokeDashoffset;
-@property (nonatomic, assign) CGPathRef hitArea;
 @property (nonatomic, copy) NSArray<NSString *> *propList;
-@property (nonatomic, strong) NSMutableArray<NSString *> *ownedPropList;
 
-- (void)setBoundingBox:(CGRect)boundingBox;
-- (CGFloat)getWidthRelatedValue:(NSString *)string;
-- (CGFloat)getHeightRelatedValue:(NSString *)string;
-- (CGFloat)getContextWidth;
-- (CGFloat)getContextHeight;
-- (CGFloat)getContextX;
-- (CGFloat)getContextY;
+- (void)setHitArea:(CGPathRef)path;
 
+- (NSArray<NSString *> *)getAttributeList;
+
+- (void)mergeProperties:(__kindof RNSVGRenderable *)target;
+
+- (void)resetProperties;
 
 @end

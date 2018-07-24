@@ -1,38 +1,27 @@
-import React, {Component, PropTypes} from 'react';
-import ViewBox from './ViewBox';
-import G from './G';
-import Defs from './Defs';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import extractViewBox from "../lib/extract/extractViewBox";
+import { requireNativeComponent } from "react-native";
+import { SymbolAttributes } from "../lib/attributes";
 
-class SymbolElement extends Component{
-    static displayName = 'Symbol';
-    static propType = {
+export default class extends Component {
+    static displayName = "Symbol";
+    static propTypes = {
         id: PropTypes.string.isRequired,
         viewBox: PropTypes.string,
         preserveAspectRatio: PropTypes.string
     };
     render() {
-        let {props} = this;
+        let { props } = this;
 
-        let viewBox = props.viewBox;
-        if (props.viewbox) {
-            viewBox = props.viewbox;
-            console.warn('Prop `viewbox` is deprecated. please use `viewBox` instead.');
-        }
-
-        let content = viewBox ? <ViewBox
-            name={props.id}
-            viewBox={viewBox}
-            preserveAspectRatio={props.preserveAspectRatio}
-        >
-            {props.children}
-        </ViewBox> : <G id={props.id}>
-            {props.children}
-        </G>;
-
-        return <Defs>
-            {content}
-        </Defs>;
+        return (
+            <RNSVGSymbol name={props.id} {...extractViewBox(props)}>
+                {props.children}
+            </RNSVGSymbol>
+        );
     }
 }
 
-export default SymbolElement;
+const RNSVGSymbol = requireNativeComponent("RNSVGSymbol", null, {
+    nativeOnly: SymbolAttributes
+});

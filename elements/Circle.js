@@ -1,11 +1,12 @@
-import React from 'react';
-import createReactNativeComponentClass from 'react/lib/createReactNativeComponentClass';
-import Shape from './Shape';
-import {CircleAttributes} from '../lib/attributes';
-import {pathProps, numberProp} from '../lib/props';
+import React from "react";
+import { requireNativeComponent } from "react-native";
+import Shape from "./Shape";
+import { CircleAttributes } from "../lib/attributes";
+import { pathProps, numberProp } from "../lib/props";
+import extractProps from "../lib/extract/extractProps";
 
-class Circle extends Shape {
-    static displayName = 'Circle';
+export default class extends Shape {
+    static displayName = "Circle";
 
     static propTypes = {
         ...pathProps,
@@ -26,21 +27,20 @@ class Circle extends Shape {
 
     render() {
         let props = this.props;
-        return <RNSVGCircle
-            ref={ele => {this.root = ele;}}
-            {...this.extractProps(props)}
-            cx={props.cx.toString()}
-            cy={props.cy.toString()}
-            r={props.r.toString()}
-        />;
+        return (
+            <RNSVGCircle
+                ref={ele => {
+                    this.root = ele;
+                }}
+                {...extractProps(props, this)}
+                cx={props.cx.toString()}
+                cy={props.cy.toString()}
+                r={props.r.toString()}
+            />
+        );
     }
 }
 
-
-
-const RNSVGCircle = createReactNativeComponentClass({
-    validAttributes: CircleAttributes,
-    uiViewClassName: 'RNSVGCircle'
+const RNSVGCircle = requireNativeComponent("RNSVGCircle", null, {
+    nativeOnly: CircleAttributes
 });
-
-export default Circle;

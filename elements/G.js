@@ -1,36 +1,40 @@
-import React from 'react';
-import createReactNativeComponentClass from 'react/lib/createReactNativeComponentClass';
-import Shape from './Shape';
-import {transformProps} from '../lib/props';
-import {GroupAttributes} from '../lib/attributes';
+import React from "react";
+import { requireNativeComponent } from "react-native";
+import Shape from "./Shape";
+import { pathProps, fontProps } from "../lib/props";
+import { GroupAttributes } from "../lib/attributes";
+import extractProps from "../lib/extract/extractProps";
+import { extractFont } from "../lib/extract/extractText";
 
-class G extends Shape{
-    static displayName = 'G';
+export default class extends Shape {
+    static displayName = "G";
 
-    static propTypes = transformProps;
+    static propTypes = {
+        ...pathProps,
+        ...fontProps
+    };
 
     setNativeProps = (...args) => {
         this.root.setNativeProps(...args);
     };
 
     render() {
-        let {props} = this;
+        let { props } = this;
 
-        return <RNSVGGroup
-            {...this.extractProps(props)}
-            ref={ele => {this.root = ele;}}
-        >
-            {props.children}
-        </RNSVGGroup>;
+        return (
+            <RNSVGGroup
+                {...extractProps(props, this)}
+                font={extractFont(props)}
+                ref={ele => {
+                    this.root = ele;
+                }}
+            >
+                {props.children}
+            </RNSVGGroup>
+        );
     }
 }
 
-const RNSVGGroup = createReactNativeComponentClass({
-    validAttributes: GroupAttributes,
-    uiViewClassName: 'RNSVGGroup'
+const RNSVGGroup = requireNativeComponent("RNSVGGroup", null, {
+    nativeOnly: GroupAttributes
 });
-
-export default G;
-export {
-    RNSVGGroup as NativeGroup
-};

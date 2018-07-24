@@ -1,11 +1,12 @@
-import React, {PropTypes} from 'react';
-import {numberProp} from '../lib/props';
-import Gradient from './Gradient';
-import createReactNativeComponentClass from 'react/lib/createReactNativeComponentClass';
-import {RadialGradientAttributes} from '../lib/attributes';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { numberProp } from "../lib/props";
+import extractGradient from "../lib/extract/extractGradient";
+import { requireNativeComponent } from "react-native";
+import { RadialGradientAttributes } from "../lib/attributes";
 
-class RadialGradient extends Gradient{
-    static displayName = 'RadialGradient';
+export default class extends Component {
+    static displayName = "RadialGradient";
     static propTypes = {
         fx: numberProp.isRequired,
         fy: numberProp.isRequired,
@@ -14,36 +15,38 @@ class RadialGradient extends Gradient{
         cx: numberProp.isRequired,
         cy: numberProp.isRequired,
         r: numberProp,
+        gradientUnits: PropTypes.oneOf(["objectBoundingBox", "userSpaceOnUse"]),
         id: PropTypes.string.isRequired
     };
 
     static defaultProps = {
-        fx: '50%',
-        fy: '50%',
-        cx: '50%',
-        cy: '50%',
-        r: '50%'
+        fx: "50%",
+        fy: "50%",
+        cx: "50%",
+        cy: "50%",
+        r: "50%"
     };
 
     render() {
-        let {props} = this;
-        return <RNSVGRadialGradient
-            fx={props.fx.toString()}
-            fy={props.fy.toString()}
-            rx={(props.rx || props.r).toString()}
-            ry={(props.ry || props.r).toString()}
-            cx={props.cx.toString()}
-            cy={props.cy.toString()}
-            gradient={this.getGradient()}
-            name={props.id}
-        />;
-
+        let { props } = this;
+        return (
+            <RNSVGRadialGradient
+                fx={props.fx.toString()}
+                fy={props.fy.toString()}
+                rx={(props.rx || props.r).toString()}
+                ry={(props.ry || props.r).toString()}
+                cx={props.cx.toString()}
+                cy={props.cy.toString()}
+                {...extractGradient(this.props)}
+            />
+        );
     }
 }
 
-const RNSVGRadialGradient = createReactNativeComponentClass({
-    validAttributes: RadialGradientAttributes,
-    uiViewClassName: 'RNSVGRadialGradient'
-});
-
-export default RadialGradient;
+const RNSVGRadialGradient = requireNativeComponent(
+    "RNSVGRadialGradient",
+    null,
+    {
+        nativeOnly: RadialGradientAttributes
+    }
+);

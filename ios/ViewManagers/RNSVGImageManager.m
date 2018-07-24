@@ -7,7 +7,7 @@
  */
 
 #import "RNSVGImageManager.h"
-
+#import "RNSVGVBMOS.h"
 #import "RNSVGImage.h"
 #import "RCTConvert+RNSVG.h"
 
@@ -17,7 +17,10 @@ RCT_EXPORT_MODULE()
 
 - (RNSVGRenderable *)node
 {
-    return [RNSVGImage new];
+    RNSVGImage *svgImage = [RNSVGImage new];
+    svgImage.bridge = self.bridge;
+    
+    return svgImage;
 }
 
 RCT_EXPORT_VIEW_PROPERTY(x, NSString)

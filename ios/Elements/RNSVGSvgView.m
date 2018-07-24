@@ -7,16 +7,27 @@
  */
 
 #import "RNSVGSvgView.h"
-
+#import "RNSVGViewBox.h"
 #import "RNSVGNode.h"
-#import "RCTLog.h"
+#import <React/RCTLog.h>
 
 @implementation RNSVGSvgView
 {
-    NSMutableDictionary<NSString *, RNSVGNode *> *clipPaths;
-    NSMutableDictionary<NSString *, RNSVGNode *> *templates;
-    NSMutableDictionary<NSString *, RNSVGBrushConverter *> *brushConverters;
-    CGRect _boundingBox;
+    NSMutableDictionary<NSString *, RNSVGNode *> *_clipPaths;
+    NSMutableDictionary<NSString *, RNSVGNode *> *_templates;
+    NSMutableDictionary<NSString *, RNSVGPainter *> *_painters;
+    CGAffineTransform _viewBoxTransform;
+    CGAffineTransform _invviewBoxTransform;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+  if (self = [super initWithFrame:frame]) {
+    // This is necessary to ensure that [self setNeedsDisplay] actually triggers
+    // a redraw when our parent transitions between hidden and visible.
+    self.contentMode = UIViewContentModeRedraw;
+  }
+  return self;
 }
 
 - (void)insertReactSubview:(UIView *)subview atIndex:(NSInteger)atIndex
@@ -42,37 +53,166 @@
     [self setNeedsDisplay];
 }
 
-- (void)drawRect:(CGRect)rect
+- (void)setMinX:(CGFloat)minX
 {
-    clipPaths = nil;
-    templates = nil;
-    brushConverters = nil;
-    _boundingBox = rect;
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    for (RNSVGNode *node in self.subviews) {
-        if ([node isKindOfClass:[RNSVGNode class]]) {
-            if (node.responsible && !self.responsible) {
-                self.responsible = YES;
-                break;
-            }
-        }
+    if (minX == _minX) {
+        return;
     }
-    
-    for (RNSVGNode *node in self.subviews) {
+
+    [self invalidate];
+    _minX = minX;
+}
+
+- (void)setMinY:(CGFloat)minY
+{
+    if (minY == _minY) {
+        return;
+    }
+
+    [self invalidate];
+    _minY = minY;
+}
+
+- (void)setVbWidth:(CGFloat)vbWidth
+{
+    if (vbWidth == _vbWidth) {
+        return;
+    }
+
+    [self invalidate];
+    _vbWidth = vbWidth;
+}
+
+- (void)setVbHeight:(CGFloat)vbHeight
+{
+    if (_vbHeight == vbHeight) {
+        return;
+    }
+
+    [self invalidate];
+    _vbHeight = vbHeight;
+}
+
+- (void)setBBWidth:(NSString *)bbWidth
+{
+    if ([bbWidth isEqualToString:_bbWidth]) {
+        return;
+    }
+
+    [self invalidate];
+    _bbWidth = bbWidth;
+}
+
+- (void)setBBHeight:(NSString *)bbHeight
+{
+    if ([bbHeight isEqualToString:_bbHeight]) {
+        return;
+    }
+
+    [self invalidate];
+    _bbHeight = bbHeight;
+}
+
+- (void)setAlign:(NSString *)align
+{
+    if ([align isEqualToString:_align]) {
+        return;
+    }
+
+    [self invalidate];
+    _align = align;
+}
+
+- (void)setMeetOrSlice:(RNSVGVBMOS)meetOrSlice
+{
+    if (meetOrSlice == _meetOrSlice) {
+        return;
+    }
+
+    [self invalidate];
+    _meetOrSlice = meetOrSlice;
+}
+
+- (void)drawToContext:(CGContextRef)context withRect:(CGRect)rect {
+
+    self.initialCTM = CGContextGetCTM(context);
+    self.invInitialCTM = CGAffineTransformInvert(self.initialCTM);
+    if (self.align) {
+        _viewBoxTransform = [RNSVGViewBox getTransform:CGRectMake(self.minX, self.minY, self.vbWidth, self.vbHeight)
+                                                 eRect:rect
+                                                 align:self.align
+                                           meetOrSlice:self.meetOrSlice];
+        _invviewBoxTransform = CGAffineTransformInvert(_viewBoxTransform);
+        CGContextConcatCTM(context, _viewBoxTransform);
+    }
+
+    for (UIView *node in self.subviews) {
         if ([node isKindOfClass:[RNSVGNode class]]) {
-            [node saveDefinition];
-            [node renderTo:context];
+            RNSVGNode *svg = (RNSVGNode *)node;
+            [svg renderTo:context
+                     rect:rect];
+        } else {
+            [node drawRect:rect];
         }
     }
 }
+
+- (void)drawRect:(CGRect)rect
+{
+    _clipPaths = nil;
+    _templates = nil;
+    _painters = nil;
+    _boundingBox = rect;
+    CGContextRef context = UIGraphicsGetCurrentContext();
+
+    for (UIView *node in self.subviews) {
+        if ([node isKindOfClass:[RNSVGNode class]]) {
+            RNSVGNode *svg = (RNSVGNode *)node;
+            if (svg.responsible && !self.responsible) {
+                self.responsible = YES;
+            }
+
+            [svg parseReference];
+        }
+    }
+
+    [self drawToContext:context withRect:rect];
+}
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    if (self.align) {
+        CGPoint transformed = CGPointApplyAffineTransform(point, _invviewBoxTransform);
+        for (RNSVGNode *node in [self.subviews reverseObjectEnumerator]) {
+            if (![node isKindOfClass:[RNSVGNode class]]) {
+                continue;
+            }
+
+            if (event) {
+                node.active = NO;
+            } else if (node.active) {
+                return node;
+            }
+
+            UIView *hitChild = [node hitTest:transformed withEvent:event];
+
+            if (hitChild) {
+                node.active = YES;
+                return (node.responsible || (node != hitChild)) ? hitChild : self;
+            }
+        }
+        return nil;
+    } else {
+        return [super hitTest:point withEvent:event];
+    }
+}
+
 
 - (NSString *)getDataURL
 {
     UIGraphicsBeginImageContextWithOptions(_boundingBox.size, NO, 0);
     [self drawRect:_boundingBox];
-    UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
-    NSData *imageData = UIImagePNGRepresentation(image);
+    NSData *imageData = UIImagePNGRepresentation(UIGraphicsGetImageFromCurrentImageContext());
     NSString *base64 = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     UIGraphicsEndImageContext();
     return base64;
@@ -83,49 +223,49 @@
     self.backgroundColor = inheritedBackgroundColor;
 }
 
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+- (void)defineClipPath:(__kindof RNSVGNode *)clipPath clipPathName:(NSString *)clipPathName
 {
-    return self.responsible ? [super hitTest:point withEvent:event] : nil;
-}
-
-- (void)defineClipPath:(__kindof RNSVGNode *)clipPath clipPathRef:(NSString *)clipPathRef
-{
-    if (!clipPaths) {
-        clipPaths = [[NSMutableDictionary alloc] init];
+    if (!_clipPaths) {
+        _clipPaths = [[NSMutableDictionary alloc] init];
     }
-    [clipPaths setObject:clipPath forKey:clipPathRef];
+    [_clipPaths setObject:clipPath forKey:clipPathName];
 }
 
-- (RNSVGNode *)getDefinedClipPath:(NSString *)clipPathRef
+- (RNSVGNode *)getDefinedClipPath:(NSString *)clipPathName
 {
-    return clipPaths ? [clipPaths objectForKey:clipPathRef] : nil;
+    return _clipPaths ? [_clipPaths objectForKey:clipPathName] : nil;
 }
 
-- (void)defineTemplate:(RNSVGNode *)template templateRef:(NSString *)templateRef
+- (void)defineTemplate:(RNSVGNode *)template templateName:(NSString *)templateName
 {
-    if (!templates) {
-        templates = [[NSMutableDictionary alloc] init];
+    if (!_templates) {
+        _templates = [[NSMutableDictionary alloc] init];
     }
-    [templates setObject:template forKey:templateRef];
+    [_templates setObject:template forKey:templateName];
 }
 
-- (RNSVGNode *)getDefinedTemplate:(NSString *)tempalteRef
+- (RNSVGNode *)getDefinedTemplate:(NSString *)templateName
 {
-    return templates ? [templates objectForKey:tempalteRef] : nil;
+    return _templates ? [_templates objectForKey:templateName] : nil;
 }
 
 
-- (void)defineBrushConverter:(RNSVGBrushConverter *)brushConverter brushConverterRef:(NSString *)brushConverterRef
+- (void)definePainter:(RNSVGPainter *)painter painterName:(NSString *)painterName
 {
-    if (!brushConverters) {
-        brushConverters = [[NSMutableDictionary alloc] init];
+    if (!_painters) {
+        _painters = [[NSMutableDictionary alloc] init];
     }
-    [brushConverters setObject:brushConverter forKey:brushConverterRef];
+    [_painters setObject:painter forKey:painterName];
 }
 
-- (RNSVGBrushConverter *)getDefinedBrushConverter:(NSString *)brushConverterRef
+- (RNSVGPainter *)getDefinedPainter:(NSString *)painterName;
 {
-    return brushConverters ? [brushConverters objectForKey:brushConverterRef] : nil;
+    return _painters ? [_painters objectForKey:painterName] : nil;
+}
+
+- (CGRect)getContextBounds
+{
+    return CGContextGetClipBoundingBox(UIGraphicsGetCurrentContext());
 }
 
 @end

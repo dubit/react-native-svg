@@ -1,55 +1,108 @@
 ## react-native-svg
 
 [![Version](https://img.shields.io/npm/v/react-native-svg.svg)](https://www.npmjs.com/package/react-native-svg)
-[![Build Status](https://travis-ci.org/magicismight/react-native-svg.svg?branch=master)](https://travis-ci.org/magicismight/react-native-svg)
-[![Known Vulnerabilities](https://snyk.io/test/npm/react-native-svg/badge.svg)](https://snyk.io/test/npm/react-native-svg)
+[![NPM](https://img.shields.io/npm/dm/react-native-svg.svg)](https://www.npmjs.com/package/react-native-svg)
 
-`react-native-svg` is built to provide a SVG interface to react native on both iOS and Android
+`react-native-svg` is built to provide a SVG interface to react native on both iOS and Android.
 
-# IMPORTANT：
+[Check out the demo](https://expo.io/@msand/svgexample) [Source](https://github.com/peterlazar1993/react-native-svg-example/commit/8944e14d2dd1b36cc41fe089ac547cdc9149c111).
 
-`react-native-art-svg` has changed name to **`react-native-svg`**(*thanks for [@Brent Vatne](https://github.com/brentvatne) handing over me this npm package.*).
+## Features
 
-And furthermore:
-`react-native-svg` **NO LONGER rely on ReactNativeART**, it has its own native code dependency now (which is based on ReactNativeART code but support more SVG features)
-
-
-### Features
-
-1. Supports most of SVG elements and properties(Rect, Circle, Line, Polyline, Polygon, G ...).
+1. Supports most SVG elements and properties (Rect, Circle, Line, Polyline, Polygon, G ...).
 2. Easy to convert SVG code into ReactNative code.
 
+### Installation
 
-#### Install
+#### Automatic
 
-### note: react-native-svg >= 3.0 only support react-native >= 0.29.0
+*With Expo, this is pre-installed. Jump ahead to [Usage](#Usage)*
 
-1. Install library from npm.
+1. Install library from `npm`
 
-```bash
-npm install react-native-svg --save
+    ```bash
+    npm install react-native-svg --save
+    ```
+
+    # NOTICE:
+
+    - react-native-svg >= 3.2.0 only supports react-native >= 0.29.0
+    - react-native-svg >= 4.2.0 only supports react-native >= 0.32.0
+    - react-native-svg >= 4.3.0 only supports react-native >= 0.33.0
+    - react-native-svg >= 4.4.0 only supports react-native >= 0.38.0 and react >= 15.4.0
+    - react-native-svg >= 4.5.0 only supports react-native >= 0.40.0 and react >= 15.4.0
+    - react-native-svg >= 5.1.8 only supports react-native >= 0.44.0 and react == 16.0.0-alpha.6
+    - react-native-svg >= 5.2.0 only supports react-native >= 0.45.0 and react == 16.0.0-alpha.12
+    - react-native-svg >= 5.3.0 only supports react-native >= 0.46.0 and react == 16.0.0-alpha.12
+    - react-native-svg >= 5.4.1 only supports react-native >= 0.47.0 and react == 16.0.0-alpha.12
+    - react-native-svg >= 5.5.1 only supports react-native >= 0.50.0 and react == 16.0.0
+
+2. Link native code
+
+    ```bash
+    react-native link react-native-svg
+    ```
+
+    A bug in react-native currently links the tvOS library into the iOS project as well.
+
+    Until the fix is released:
+    https://github.com/facebook/react-native/issues/13783
+    https://github.com/facebook/react-native/commit/a63fd378a47173cc9f750e9980f18dc12dd7ea51
+
+    Follow the instructions here: https://github.com/react-native-community/react-native-svg/issues/544
+
+#### Manual
+
+##### Android
+
+1. `npm install react-native-svg --save`
+
+2. Append the following lines to `android/settings.gradle`:
+
+	```
+	include ':react-native-svg'
+	project(':react-native-svg').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-svg/android')
+	```
+
+3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
+
+	```
+    compile project(':react-native-svg')
+	```
+
+4. Open up `android/app/src/main/java/[...]/MainApplication.java
+  - Add `import com.horcrux.svg.SvgPackage;` to the imports at the top of the file
+  - Add `new SvgPackage()` to the list returned by the `getPackages()` method. Add a comma to the previous item if there's already something there.
+
+##### iOS
+
+[Manual linking](http://facebook.github.io/react-native/docs/linking-libraries-ios.html#manual-linking)
+
+To install react-native-svg on iOS visit the link referenced above or do the following:
+
+1. Open your project in XCode and drag the RNSVG.xcodeproj file (located in .../node_modules/react-native-svg/ios) into the Libraries directory shown in XCode.
+2. Expand the RNSVG.xcodeproj file you just added to XCode until you see: libRNSVG.a (located in RNSVG.xcodeproj > Products )
+3. Drag libRNSVG.a into the Link Binary With Libraries section (located in Build Phases which may be found at the top of the XCode window)
+
+###### CocoaPods
+
+Alternatively, you can use [CocoaPods](https://cocoapods.org/) to manage your native (Objective-C and Swift) dependencies:
+
+1. Add RNSVG to your Podfile
+```
+pod 'RNSVG', :path => '../node_modules/react-native-svg'
 ```
 
-2 . Link native code
+### <a name="Usage">Usage</a>
 
-```bash
-react-native link react-native-svg
-```
-react-native@0.29.0 and 0.29.1 cannot work with Android link properly:[here](https://github.com/facebook/react-native/pull/8612)
+Here's a simple example. To render output like this:
 
+![SVG example](https://raw.githubusercontent.com/react-native-community/react-native-svg/master/screenShoots/svg.png)
 
-Or use rnpm instead
-
-```bash
-rnpm link react-native-svg
-```
-
-
-#### Usage
-
-There is an easy example
+Use the following code:
 
 ```javascript
+import 'react';
 import Svg,{
     Circle,
     Ellipse,
@@ -96,37 +149,36 @@ class SvgExample extends Component {
         );
     }
 }
-
 ```
 
-This will draw a graphics like this
-![SVG example](./screenShoots/svg.png)
+[Try this on Snack](https://snack.expo.io/r1hCVAaEZ)
 
-#### Common props:
+### Common props:
 
 Name            | Default    | Description
 ----------------|------------|--------------
 fill            | '#000'     | The fill prop refers to the color inside the shape.
 fillOpacity     | 1          | This prop specifies the opacity of the color or the content the current object is filled with.
+fillRule        | nonzero    | The fillRule prop determines what side of a path is inside a shape, which determines how fill will paint the shape, can be `nonzero` or `evenodd`
 stroke          | 'none'     | The stroke prop controls how the outline of a shape appears.
 strokeWidth     | 1          | The strokeWidth prop specifies the width of the outline on the current object.
 strokeOpacity   | 1          | The strokeOpacity prop specifies the opacity of the outline on the current object.
-strokeLinecap   | 'square'   | The strokeLinecap prop specifies the shape to be used at the end of open subpaths when they are stroked.
-strokeLinejoin  | 'miter'    | The strokeLinejoin prop specifies the shape to be used at the corners of paths or basic shapes when they are stroked.
+strokeLinecap   | 'square'   | The strokeLinecap prop specifies the shape to be used at the end of open subpaths when they are stroked. Can be either `'butt'`, `'square'` or `'round'`.
+strokeLinejoin  | 'miter'    | The strokeLinejoin prop specifies the shape to be used at the corners of paths or basic shapes when they are stroked. Can be either `'miter'`, `'bevel'` or `'round'`.
 strokeDasharray | []         | The strokeDasharray prop controls the pattern of dashes and gaps used to stroke paths.
 strokeDashoffset| null       | The strokeDashoffset prop specifies the distance into the dash pattern to start the dash.
 x               | 0          | Translate distance on x-axis.
 y               | 0          | Translate distance on y-axis.
-rotate          | 0          | Rotation degree value on the current object.
+rotation          | 0          | Rotation degree value on the current object.
 scale           | 1          | Scale value on the current object.
 origin          | 0, 0       | Transform origin coordinates for the current object.
 originX         | 0          | Transform originX coordinates for the current object.
 originY         | 0          | Transform originY coordinates for the current object.
 
 
-#### Supported elements:
+### Supported elements:
 
-##### Svg
+#### Svg
 
 ```html
 <Svg
@@ -141,9 +193,10 @@ originY         | 0          | Transform originY coordinates for the current obj
 </Svg>
 ```
 
-##### Rect
+### Rect
 
 The <Rect> element is used to create a rectangle and variations of a rectangle shape:
+
 
 ```html
 <Svg
@@ -162,13 +215,13 @@ The <Rect> element is used to create a rectangle and variations of a rectangle s
 </Svg>
 ```
 
-![Rect](./screenShoots/rect.png)
+![Rect](https://raw.githubusercontent.com/react-native-community/react-native-svg/master/screenShoots/rect.png)
 
   Code explanation:
 
-  * The width and height props of the <Rect> element define the height and the width of the rectangle
-  * The x prop defines the left position of the rectangle (e.g. x="25" places the rectangle 25 px from the left margin)
-  * The y prop defines the top position of the rectangle (e.g. y="5" places the rectangle 5 px from the top margin)
+  * The width and height props of the <Rect> element define the height and the width of the rectangle.
+  * The x prop defines the left position of the rectangle (e.g. x="25" places the rectangle 25 px from the left margin).
+  * The y prop defines the top position of the rectangle (e.g. y="5" places the rectangle 5 px from the top margin).
 
 ##### Circle
 
@@ -188,18 +241,18 @@ The <Circle> element is used to create a circle:
 </Svg>
 ```
 
-![Rect](./screenShoots/circle.png)
+![Rect](https://raw.githubusercontent.com/react-native-community/react-native-svg/master/screenShoots/circle.png)
 
   Code explanation:
 
   * The cx and cy props define the x and y coordinates of the center of the circle. If cx and cy are omitted, the circle's center is set to (0,0)
   * The r prop defines the radius of the circle
 
-##### Ellipse
+#### Ellipse
 
 The <Ellipse> element is used to create an ellipse.
 
-An ellipse is closely related to a circle. The difference is that an ellipse has an x and a y radius that differs from each other, while a circle has equal x and y radius
+An ellipse is closely related to a circle. The difference is that an ellipse has an x and a y radius that differs from each other, while a circle has equal x and y radius.
 
 ```html
 <Svg
@@ -217,16 +270,16 @@ An ellipse is closely related to a circle. The difference is that an ellipse has
     />
 </Svg>
 ```
-![Rect](./screenShoots/ellipse.png)
+![Rect](https://raw.githubusercontent.com/react-native-community/react-native-svg/master/screenShoots/ellipse.png)
 
-  Code explanation:
+Code explanation:
 
-  * The cx prop defines the x coordinate of the center of the ellipse
-  * The cy prop defines the y coordinate of the center of the ellipse
-  * The rx prop defines the horizontal radius
-  * The ry prop defines the vertical radius
+* The cx prop defines the x coordinate of the center of the ellipse
+* The cy prop defines the y coordinate of the center of the ellipse
+* The rx prop defines the horizontal radius
+* The ry prop defines the vertical radius
 
-##### Line
+#### Line
 
 The <Line> element is an SVG basic shape, used to create a line connecting two points.
 
@@ -246,20 +299,18 @@ The <Line> element is an SVG basic shape, used to create a line connecting two p
 </Svg>
 ```
 
-![Rect](./screenShoots/line.png)
+![Rect](https://raw.githubusercontent.com/react-native-community/react-native-svg/master/screenShoots/line.png)
 
-  Code explanation:
+Code explanation:
 
-  * The x1 prop defines the start of the line on the x-axis
-  * The y1 prop defines the start of the line on the y-axis
-  * The x2 prop defines the end of the line on the x-axis
-  * The y2 prop defines the end of the line on the y-axis
+* The x1 prop defines the start of the line on the x-axis.
+* The y1 prop defines the start of the line on the y-axis.
+* The x2 prop defines the end of the line on the x-axis.
+* The y2 prop defines the end of the line on the y-axis.
 
-##### Polygon
+#### Polygon
 
-The <Polygon> element is used to create a graphic that contains at least three sides.
-
-Polygons are made of straight lines, and the shape is "closed" (all the lines connect up).
+The <Polygon> element is used to create a graphic that contains at least three sides. Polygons are made of straight lines, and the shape is "closed" (all the lines connect up).
 
 ```html
 <Svg
@@ -275,13 +326,13 @@ Polygons are made of straight lines, and the shape is "closed" (all the lines co
 </Svg>
 ```
 
-![Rect](./screenShoots/polygon.png)
+![Rect](https://raw.githubusercontent.com/react-native-community/react-native-svg/master/screenShoots/polygon.png)
 
-  Code explanation:
+Code explanation:
 
-  * The points prop defines the x and y coordinates for each corner of the polygon
+* The points prop defines the x and y coordinates for each corner of the polygon
 
-##### Polyline
+#### Polyline
 
 The <Polyline> element is used to create any shape that consists of only straight lines:
 
@@ -299,13 +350,13 @@ The <Polyline> element is used to create any shape that consists of only straigh
 </Svg>
 ```
 
-![Rect](./screenShoots/polyline.png)
+![Rect](https://raw.githubusercontent.com/react-native-community/react-native-svg/master/screenShoots/polyline.png)
 
-  Code explanation:
+Code explanation:
 
-  * The points prop defines the x and y coordinates for each point of the polyline
+* The points prop defines the x and y coordinates for each point of the polyline
 
-##### Path
+#### Path
 
 The <Path> element is used to define a path.
 
@@ -321,6 +372,7 @@ The following commands are available for path data:
   * T = smooth quadratic Bézier curveto
   * A = elliptical Arc
   * Z = closepath
+
 `Note:` All of the commands above can also be expressed with lower letters. Capital letters means absolutely positioned, lower cases means relatively positioned.
 
 ```html
@@ -336,12 +388,12 @@ The following commands are available for path data:
 </Svg>
 ```
 
-![Rect](./screenShoots/path.png)
+![Rect](https://raw.githubusercontent.com/react-native-community/react-native-svg/master/screenShoots/path.png)
 
 
-##### Text
+#### Text
 
-The <Text> element is used to define a text.
+The <Text> element is used to define text.
 
 ```html
 <Svg
@@ -360,9 +412,74 @@ The <Text> element is used to define a text.
 </Svg>
 ```
 
-![Rect](./screenShoots/text.png)
+![Text](https://raw.githubusercontent.com/react-native-community/react-native-svg/master/screenShoots/text.png)
 
-##### G
+#### TSpan
+
+The <TSpan> element is used to draw multiple lines of text in SVG. Rather than having to position each line of text absolutely, the <TSpan> element makes it possible to position a line of text relatively to the previous line of text.
+
+```html
+<Svg
+    height="160"
+    width="200"
+>
+    <Text y="20" dx="5 5">
+        <TSpan x="10" >tspan line 1</TSpan>
+        <TSpan x="10" dy="15">tspan line 2</TSpan>
+        <TSpan x="10" dx="10" dy="15">tspan line 3</TSpan>
+    </Text>
+    <Text x="10" y="60" fill="red" fontSize="14">
+        <TSpan dy="5 10 20" >12345</TSpan>
+        <TSpan fill="blue" dy="15" dx="0 5 5">
+            <TSpan>6</TSpan>
+            <TSpan>7</TSpan>
+        </TSpan>
+        <TSpan dx="0 10 20" dy="0 20" fontWeight="bold" fontSize="12">89a</TSpan>
+    </Text>
+    <Text y="140" dx="0 5 5" dy="0 -5 -5">delta on text</Text>
+</Svg>
+```
+
+![TSpan](https://raw.githubusercontent.com/react-native-community/react-native-svg/master/screenShoots/tspan.png)
+
+#### TextPath
+
+In addition to text drawn in a straight line, SVG also includes the ability to place text along the shape of a <Path> element. To specify that a block of text is to be rendered along the shape of a <Path>, include the given text within a <TextPath> element which includes an href attribute with a reference to a <Path> element.
+
+```html
+<Svg
+    height="100"
+    width="200"
+>
+    <Defs>
+        <Path
+            id="path"
+            d={path}
+        />
+    </Defs>
+    <G y="20">
+        <Text
+            fill="blue"
+
+        >
+            <TextPath href="#path" startOffset="-10%">
+                We go up and down,
+                <TSpan fill="red" dy="5,5,5">then up again</TSpan>
+            </TextPath>
+        </Text>
+        <Path
+            d={path}
+            fill="none"
+            stroke="red"
+            strokeWidth="1"
+        />
+    </G>
+</Svg>
+```
+
+![TextPath](https://raw.githubusercontent.com/react-native-community/react-native-svg/master/screenShoots/text-path.png)
+
+#### G
 
 The <G> element is a container used to group other SVG elements. Transformations applied to the g element are performed on all of its child elements, and any of its props are inherited by its child elements. It can also group multiple elements to be referenced later with the [&lt;Use /&gt;](#use) element.
 
@@ -372,7 +489,7 @@ The <G> element is a container used to group other SVG elements. Transformations
     width="200"
 >
     <G
-        rotate="50"
+        rotation="50"
         origin="100, 50"
     >
         <Line
@@ -403,13 +520,11 @@ The <G> element is a container used to group other SVG elements. Transformations
     </G>
 </Svg>
 ```
-![G](./screenShoots/g.png)
+![G](https://raw.githubusercontent.com/react-native-community/react-native-svg/master/screenShoots/g.png)
 
-<h5 id="use">Use</h5>
+#### Use
 
-The <Use> element can reuse an SVG shape from elsewhere in the SVG document, including <G> elements and <Symbol> elements.
-
-The reused shape can be defined inside the [&lt;Defs&gt;](#defs) element (which makes the shape invisible until used) or outside.
+The <Use> element can reuse an SVG shape from elsewhere in the SVG document, including <G> elements and <Symbol> elements. The reused shape can be defined inside the [&lt;Defs&gt;](#defs) element (which makes the shape invisible until used) or outside.
 
 ```html
 <Svg
@@ -436,10 +551,10 @@ Before the <G> element can be referenced, it must have an ID set on it via its i
 
 The <Use> element specifies where to show the reused shapes via its x and y props. Notice that the shapes inside the <G> element are located at 0,0. That is done because their position is added to the position specified in the <Use> element.
 
-![use](./screenShoots/use.png)
+![use](https://raw.githubusercontent.com/react-native-community/react-native-svg/master/screenShoots/use.png)
 
 
-##### Symbol
+#### Symbol
 
 The SVG <Symbol> element is used to define reusable symbols. The shapes nested inside a <Symbol> are not displayed unless referenced by a <Use> element.
 
@@ -448,7 +563,7 @@ The SVG <Symbol> element is used to define reusable symbols. The shapes nested i
     height="150"
     width="110"
 >
-    <Symbol id="symbol" viewbox="0 0 150 110" width="100" height="50">
+    <Symbol id="symbol" viewBox="0 0 150 110" width="100" height="50">
         <Circle cx="50" cy="50" r="40" strokeWidth="8" stroke="red" fill="red"/>
         <Circle cx="90" cy="60" r="40" strokeWidth="8" stroke="green" fill="white"/>
     </Symbol>
@@ -475,13 +590,116 @@ The SVG <Symbol> element is used to define reusable symbols. The shapes nested i
 </Svg>
 ```
 
-![symbol](./screenShoots/symbol.png)
+![Symbol](https://raw.githubusercontent.com/react-native-community/react-native-svg/master/screenShoots/symbol.png)
 
-<h5 id="defs">Defs</h5>
+#### Defs
 
 The <Defs> element is used to embed definitions that can be reused inside an SVG image. For instance, you can group SVG shapes together and reuse them as a single shape.
 
-##### LinearGradient
+#### Image
+
+The <Image> element allows a raster image to be included in an Svg componenet.
+
+```html
+<Svg
+    height="100"
+    width="100"
+>
+    <Defs>
+        <ClipPath id="clip">
+            <Circle cx="50%" cy="50%" r="40%"/>
+        </ClipPath>
+    </Defs>
+    <Rect
+        x="0"
+        y="0"
+        width="100%"
+        height="100%"
+        fill="red"
+    />
+    <Rect
+        x="5%"
+        y="5%"
+        width="50%"
+        height="90%"
+    />
+
+    <Image
+        x="5%"
+        y="5%"
+        width="50%"
+        height="90%"
+        preserveAspectRatio="xMidYMid slice"
+        opacity="0.5"
+        href={require('../image.jpg')}
+        clipPath="url(#clip)"
+    />
+    <Text
+        x="50"
+        y="50"
+        textAnchor="middle"
+        fontWeight="bold"
+        fontSize="16"
+        fill="blue"
+    >HOGWARTS</Text>
+</Svg>
+```
+
+![Image](https://raw.githubusercontent.com/react-native-community/react-native-svg/master/screenShoots/image.png)
+
+#### ClipPath
+
+The <ClipPath> SVG element defines a clipping path. A clipping path is used/referenced using the clipPath property
+
+```html
+<Svg
+    height="100"
+    width="100"
+>
+    <Defs>
+        <RadialGradient id="grad" cx="50%" cy="50%" rx="50%" ry="50%" fx="50%" fy="50%" gradientUnits="userSpaceOnUse">
+            <Stop
+                offset="0%"
+                stopColor="#ff0"
+                stopOpacity="1"
+            />
+            <Stop
+                offset="100%"
+                stopColor="#00f"
+                stopOpacity="1"
+            />
+        </RadialGradient>
+        <ClipPath id="clip">
+            <G scale="0.9" x="10">
+                <Circle cx="30" cy="30" r="20"/>
+                <Ellipse cx="60" cy="70" rx="20" ry="10" />
+                <Rect x="65" y="15" width="30" height="30" />
+                <Polygon points="20,60 20,80 50,70" />
+                <Text
+                    x="50"
+                    y="30"
+                    fontSize="32"
+                    fonWeight="bold"
+                    textAnchor="middle"
+                    scale="1.2"
+                >Q</Text>
+            </G>
+        </ClipPath>
+    </Defs>
+    <Rect
+        x="0"
+        y="0"
+        width="100"
+        height="100"
+        fill="url(#grad)"
+        clipPath="url(#clip)"
+    />
+</Svg>
+```
+
+![ClipPath](https://raw.githubusercontent.com/react-native-community/react-native-svg/master/screenShoots/clip-path.png)
+
+#### LinearGradient
 
 The <LinearGradient> element is used to define a linear gradient.
 The <LinearGradient> element must be nested within a [&lt;Defs&gt;](#defs) tag. The [&lt;Defs&gt;](#defs) tag is short for definitions and contains definition of special elements (such as gradients).
@@ -514,7 +732,7 @@ Code explanation:
   * The color range for a gradient can be composed of two or more colors. Each color is specified with a <Stop> tag. The offset prop is used to define where the gradient color begin and end
   * The fill prop links the ellipse element to the gradient
 
-![LinearGradient](./screenShoots/lineargradient.png)
+![LinearGradient](https://raw.githubusercontent.com/react-native-community/react-native-svg/master/screenShoots/lineargradient.png)
 
 *NOTICE:*
 LinearGradient also supports percentage as prop:
@@ -524,14 +742,11 @@ LinearGradient also supports percentage as prop:
     <Stop offset="100%" stopColor="red" stopOpacity="1" />
 </LinearGradient>
 ```
-This result is same as the example before.
+This result is same as the example before. But it's recommend to use exact number instead; it has performance advantages over using percentages.
 
-But I recommend you to use exact number instead, it has more performance advantages while using number instead of percentage.
+#### RadialGradient
 
-##### RadialGradient
-
-The <RadialGradient> element is used to define a radial gradient.
-The <RadialGradient> element must be nested within a [&lt;Defs&gt;](#defs) tag. The [&lt;Defs&gt;](#defs) tag is short for definitions and contains definition of special elements (such as gradients).
+The <RadialGradient> element is used to define a radial gradient. The <RadialGradient> element must be nested within a [&lt;Defs&gt;](#defs) tag. The [&lt;Defs&gt;](#defs) tag is short for definitions and contains definition of special elements (such as gradients).
 
 ```html
 <Svg
@@ -539,7 +754,7 @@ The <RadialGradient> element must be nested within a [&lt;Defs&gt;](#defs) tag. 
     width="300"
 >
     <Defs>
-        <RadialGradient id="grad" cx="150" cy="75" rx="85" ry="55" fx="150" fy="75">
+        <RadialGradient id="grad" cx="150" cy="75" rx="85" ry="55" fx="150" fy="75" gradientUnits="userSpaceOnUse">
             <Stop
                 offset="0"
                 stopColor="#ff0"
@@ -563,32 +778,63 @@ Code explanation:
   * The color range for a gradient can be composed of two or more colors. Each color is specified with a <stop> tag. The offset prop is used to define where the gradient color begin and end
   * The fill prop links the ellipse element to the gradient
 
-![RadialGradient](./screenShoots/radialgradient.png)
+![RadialGradient](https://raw.githubusercontent.com/react-native-community/react-native-svg/master/screenShoots/radialgradient.png)
 
-#### Run example:
+#### Touch Events
+
+Touch events are supported in react-native-svg. These include:
+
+ - `disabled`
+ - `onPress`
+ - `onPressIn`
+ - `onPressOut`
+ - `onLongPress`
+ - `delayPressIn`
+ - `delayPressOut`
+ - `delayLongPress`
+
+You can use these events to provide interactivity to your react-native-svg components.
+
+```html
+<Circle
+    cx="50%"
+    cy="50%"
+    r="38%"
+    fill="red"
+    onPress={() => alert('Press on Circle')}
+/>
+```
+
+![TouchEvents](https://raw.githubusercontent.com/react-native-community/react-native-svg/master/screenShoots/touchevents.gif)
+
+For more examples of touch in action, checkout the [TouchEvents.js examples](https://github.com/magicismight/react-native-svg-example/blob/master/examples/TouchEvents.js).
+
+### Run example:
 
 ```bash
 
-cd ./Example
-npm install
+git clone https://github.com/magicismight/react-native-svg-example.git
+cd react-native-svg-example
+npm i
+
+# run Android: react-native run-android
+# run iOS: react-native run-ios
 
 ```
 
-#### TODO:
-1. add native method for elements
-2. more Text features support (textPath, tref, tspan)
-3. Pattern element
-4. implement Animated elements
-5. load Image from url
-6. Mask element
+
+### TODO:
+1. Add Native methods for elements.
+2. Pattern element.
+3. Mask element.
+4. Marker element.
+5. Load Image from URL.
 
 ### Known issues:
-1. cannot set alpha channel for Gradient on iOS.
-2. cannot apply focus point of RadialGradient on Android.
-3. onPanResponderMove on Android returns incorrect gestureState.
+1. Unable to apply focus point of RadialGradient on Android.
 
-#### Thanks:
+### Thanks:
 
-* [w3schools.com SVG Tutorial](http://www.w3schools.com/svg/)
+* [w3schools.com SVG Tutorial](http://www.w3schools.com/graphics/svg_intro.asp)
 * [SVG Tutorial](http://tutorials.jenkov.com/svg/index.html)
 * [MDN](https://developer.mozilla.org/en/docs/Web/SVG)

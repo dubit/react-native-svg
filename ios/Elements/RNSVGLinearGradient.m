@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 #import "RNSVGLinearGradient.h"
-#import "RNSVGBrushConverter.h"
+#import "RNSVGPainter.h"
 #import "RNSVGBrushType.h"
 
 @implementation RNSVGLinearGradient
@@ -26,13 +26,19 @@
     return nil;
 }
 
-- (void)saveDefinition
+- (void)parseReference
 {
-    RNSVGBrushConverter *converter = [[RNSVGBrushConverter alloc] init];
-    converter.colors = self.gradient;
-    converter.points = @[self.x1, self.y1, self.x2, self.y2];
-    converter.type = kRNSVGLinearGradient;
-    [[self getSvgView] defineBrushConverter:converter brushConverterRef:self.name];
+    NSArray<NSString *> *points = @[self.x1, self.y1, self.x2, self.y2];
+    RNSVGPainter *painter = [[RNSVGPainter alloc] initWithPointsArray:points];
+    [painter setUnits:self.gradientUnits];
+    [painter setTransform:self.gradientTransform];
+    [painter setLinearGradientColors:self.gradient];
+    
+    if (self.gradientUnits == kRNSVGUnitsUserSpaceOnUse) {
+        [painter setUserSpaceBoundingBox:[self.svgView getContextBounds]];
+    }
+    
+    [self.svgView definePainter:painter painterName:self.name];
 }
 @end
 
