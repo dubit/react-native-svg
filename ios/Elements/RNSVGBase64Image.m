@@ -8,7 +8,7 @@
 
 #import "RNSVGBase64Image.h"
 #import "RCTConvert+RNSVG.h"
-#import "RCTLog.h"
+#import <React/RCTLog.h>
 
 @implementation RNSVGBase64Image
 {
@@ -106,7 +106,7 @@
     CGImageRelease(image);
 }
 
-- (void)renderLayerTo:(CGContextRef)context
+- (void)renderLayerTo:(CGContextRef)context rect:(CGRect)rect
 {
     if (frameUpdated == true) {
         CGRect box = CGContextGetClipBoundingBox(context);
