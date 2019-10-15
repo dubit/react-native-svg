@@ -15,8 +15,8 @@
 
 @interface RNSVGSvgView : UIView <RNSVGContainer>
 
-@property (nonatomic, strong) NSString *bbWidth;
-@property (nonatomic, strong) NSString *bbHeight;
+@property (nonatomic, strong) RNSVGLength *bbWidth;
+@property (nonatomic, strong) RNSVGLength *bbHeight;
 @property (nonatomic, assign) CGFloat minX;
 @property (nonatomic, assign) CGFloat minY;
 @property (nonatomic, assign) CGFloat vbWidth;
@@ -46,12 +46,20 @@
 
 - (RNSVGPainter *)getDefinedPainter:(NSString *)painterName;
 
+- (void)defineMask:(RNSVGNode *)mask maskName:(NSString *)maskName;
+
+- (RNSVGNode *)getDefinedMask:(NSString *)maskName;
+
 - (NSString *)getDataURL;
+
+- (NSString *)getDataURLwithBounds:(CGRect)bounds;
 
 - (CGRect)getContextBounds;
 
 - (void)drawRect:(CGRect)rect;
 
 - (void)drawToContext:(CGContextRef)context withRect:(CGRect)rect;
+
+- (CGAffineTransform)getViewBoxTransform;
 
 @end

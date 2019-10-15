@@ -13,7 +13,7 @@
 
 /**
  * RNSVG nodes are implemented as base UIViews. They should be implementation for all basic
- ＊interfaces for all non-defination nodes.
+ ＊interfaces for all non-definition nodes.
  */
 
 @interface RNSVGNode : UIView
@@ -30,12 +30,20 @@ extern CGFloat const RNSVG_DEFAULT_FONT_SIZE;
 @property (nonatomic, assign) CGFloat opacity;
 @property (nonatomic, assign) RNSVGCGFCRule clipRule;
 @property (nonatomic, strong) NSString *clipPath;
+@property (nonatomic, strong) NSString *mask;
 @property (nonatomic, assign) BOOL responsible;
 @property (nonatomic, assign) CGAffineTransform matrix;
+@property (nonatomic, assign) CGAffineTransform transforms;
 @property (nonatomic, assign) CGAffineTransform invmatrix;
+@property (nonatomic, assign) CGAffineTransform invTransform;
 @property (nonatomic, assign) BOOL active;
+@property (nonatomic, assign) BOOL dirty;
+@property (nonatomic, assign) BOOL merging;
+@property (nonatomic, assign) BOOL skip;
 @property (nonatomic, assign) CGPathRef path;
+@property (nonatomic, assign) CGPathRef strokePath;
 @property (nonatomic, assign) CGRect clientRect;
+@property (nonatomic, assign) CGRect pathBounds;
 @property (nonatomic, copy) RCTDirectEventBlock onLayout;
 
 
@@ -52,9 +60,9 @@ extern CGFloat const RNSVG_DEFAULT_FONT_SIZE;
 - (void)renderTo:(CGContextRef)context rect:(CGRect)rect;
 
 /**
+ * @abstract
  * renderTo will take opacity into account and draw renderLayerTo off-screen if there is opacity
  * specified, then composite that onto the context. renderLayerTo always draws at opacity=1.
- * @abstract
  */
 - (void)renderLayerTo:(CGContextRef)context rect:(CGRect)rect;
 
@@ -78,21 +86,25 @@ extern CGFloat const RNSVG_DEFAULT_FONT_SIZE;
  */
 - (CGPathRef)getPath:(CGContextRef) context;
 
-- (CGFloat)relativeOnWidth:(NSString *)length;
+- (CGFloat)relativeOnWidthString:(NSString *)length;
 
-- (CGFloat)relativeOnHeight:(NSString *)length;
+- (CGFloat)relativeOnHeightString:(NSString *)length;
 
-- (CGFloat)relativeOnOther:(NSString *)length;
+- (CGFloat)relativeOnOtherString:(NSString *)length;
+
+- (CGFloat)relativeOn:(RNSVGLength *)length relative:(CGFloat)relative;
+
+- (CGFloat)relativeOnWidth:(RNSVGLength *)length;
+
+- (CGFloat)relativeOnHeight:(RNSVGLength *)length;
+
+- (CGFloat)relativeOnOther:(RNSVGLength *)length;
 
 - (CGFloat)getFontSizeFromContext;
 
 - (CGFloat)getContextWidth;
 
 - (CGFloat)getContextHeight;
-
-- (CGFloat)getContextLeft;
-
-- (CGFloat)getContextTop;
 
 /**
  * save element`s reference into svg element.
@@ -104,5 +116,9 @@ extern CGFloat const RNSVG_DEFAULT_FONT_SIZE;
 - (void)endTransparencyLayer:(CGContextRef)context;
 
 - (void)traverseSubviews:(BOOL (^)(__kindof UIView *node))block;
+
+- (void)clearChildCache;
+
+- (void)clearPath;
 
 @end

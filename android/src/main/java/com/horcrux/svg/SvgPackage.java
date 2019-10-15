@@ -19,34 +19,42 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
+import static com.horcrux.svg.RenderableViewManager.*;
 
 public class SvgPackage implements ReactPackage {
 
+    @Nonnull
     @Override
-    public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
+    public List<ViewManager> createViewManagers(@Nonnull ReactApplicationContext reactContext) {
         return Arrays.<ViewManager>asList(
-                RenderableViewManager.createGroupViewManager(),
-                RenderableViewManager.createPathViewManager(),
-                RenderableViewManager.createCircleViewManager(),
-                RenderableViewManager.createEllipseViewManager(),
-                RenderableViewManager.createLineViewManager(),
-                RenderableViewManager.createRectViewManager(),
-                RenderableViewManager.createTextViewManager(),
-                RenderableViewManager.createTSpanViewManager(),
-                RenderableViewManager.createTextPathViewManager(),
-                RenderableViewManager.createImageViewManager(),
-                RenderableViewManager.createClipPathViewManager(),
-                RenderableViewManager.createDefsViewManager(),
-                RenderableViewManager.createUseViewManager(),
-                RenderableViewManager.createSymbolManager(),
-                RenderableViewManager.createLinearGradientManager(),
-                RenderableViewManager.createRadialGradientManager(),
-                RenderableViewManager.createBase64ImageViewManager(),
-                new SvgViewManager());
+                new GroupViewManager(),
+                new PathViewManager(),
+                new CircleViewManager(),
+                new EllipseViewManager(),
+                new LineViewManager(),
+                new RectViewManager(),
+                new TextViewManager(),
+                new TSpanViewManager(),
+                new TextPathViewManager(),
+                new ImageViewManager(),
+                new ClipPathViewManager(),
+                new DefsViewManager(),
+                new UseViewManager(),
+                new SymbolManager(),
+                new LinearGradientManager(),
+                new RadialGradientManager(),
+                new PatternManager(),
+                new MaskManager(),
+                new SvgViewManager(),
+                new Base64ImageViewManager()
+        );
     }
 
+    @Nonnull
     @Override
-    public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
+    public List<NativeModule> createNativeModules(@Nonnull ReactApplicationContext reactContext) {
         return Collections.<NativeModule>singletonList(new SvgViewModule(reactContext));
     }
 

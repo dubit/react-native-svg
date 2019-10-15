@@ -1,0 +1,1 @@
+{"version":3,"sources":["patternReg.js"],"names":[],"mappings":"AAAA,cAAe,kBAAf","sourcesContent":["export default /^url\\(#(.+?)\\)$/;\n"]}
