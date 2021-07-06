@@ -37,7 +37,7 @@
     "peg": "pegjs -o src/lib/extract/transform.js ./src/lib/extract/transform.peg",
     "tsc": "tsc --noEmit",
     "test": "yarn lint && yarn tsc",
-    "prepare": "bob build",
+    "build": "bob build",
     "semantic-release": "semantic-release"
   },
   "peerDependencies": {
